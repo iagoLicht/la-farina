@@ -1,0 +1,985 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="La Farina Food Truck. קפה איכותי, כריכים ומאפים טריים, ואווירה טובה. מרכז לידר, גני תקווה. פתוח א'-ה' 07:30-21:00, ו' 07:00-17:00.">
+<meta name="theme-color" content="#14120F">
+<meta name="format-detection" content="telephone=yes">
+
+<!-- כשיהיה דומיין, החליפו את example.com בכתובת האמיתית -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:site_name" content="La Farina Food Truck">
+<meta property="og:title" content="La Farina Food Truck">
+<meta property="og:description" content="קפה איכותי, כריכים ומאפים טריים, ואווירה טובה. מרכז לידר, גני תקווה.">
+<meta property="og:image" content="https://example.com/assets/share.jpg">
+<meta property="og:url" content="https://example.com/">
+<meta name="twitter:card" content="summary_large_image">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CafeOrCoffeeShop",
+  "name": "La Farina Food Truck",
+  "alternateName": "לה פארינה",
+  "description": "קפה איכותי, כריכים ומאפים טריים, ואווירה טובה. פוד טראק במרכז לידר, גני תקווה.",
+  "servesCuisine": ["קפה", "כריכים", "מאפים", "סלטים", "פיצה"],
+  "priceRange": "₪₪",
+  "currenciesAccepted": "ILS",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "מרכז לידר",
+    "addressLocality": "גני תקווה",
+    "addressCountry": "IL"
+  },
+  "telephone": "+972500000000",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+      "opens": "07:30",
+      "closes": "21:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Friday",
+      "opens": "07:00",
+      "closes": "17:00"
+    }
+  ]
+}
+</script>
+
+<title>La Farina Food Truck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Assistant:wght@300;400;600;700&display=swap">
+
+<style>
+/* ==========================================================================
+   LA FARINA design tokens
+   Palette taken from the brand: paper greige + painted black + white.
+   ========================================================================== */
+:root{
+  --paper:#ECE7DE;
+  --paper-2:#E2DBCF;
+  --card:#F6F2EB;
+  --ink:#14120F;
+  --ink-2:#4C453C;
+  --ink-3:#807668;
+  --line:#D2C8B7;
+  --line-2:#E0D8C9;
+  --inverse:#FBF8F2;          /* type that sits on the black banners */
+  --banner:#14120F;           /* the painted block itself            */
+  --ok:#4C7A45;
+  --shade:#EFEAE1;
+  --blur:rgba(236,231,222,.9);
+  --shadow:0 1px 2px rgba(20,18,15,.05), 0 18px 40px -22px rgba(20,18,15,.35);
+  --slot-1:#D8CDBA; --slot-2:#BCAA8E; --slot-3:#8E7A5C;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='150' height='150' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grain-o:.05; --grain-blend:multiply;
+
+  --wrap:70rem;
+  --measure:34rem;
+  --pad:clamp(1.25rem,5vw,2.75rem);
+  --display:'Playfair Display', 'Frank Ruhl Libre', Georgia, serif;
+  --heb:'Frank Ruhl Libre', 'Playfair Display', Georgia, serif;
+  --sans:'Assistant', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#131211; --paper-2:#191715; --card:#1E1B18;
+    --ink:#F0EBE1; --ink-2:#B6AC9D; --ink-3:#8A8072;
+    --line:#312D28; --line-2:#262320;
+    --inverse:#14120F;          /* banners invert: cream block, dark type */
+    --banner:#EFE9DD;
+    --ok:#7FBE74;
+    --shade:#1A1816;
+    --blur:rgba(19,18,17,.88);
+    --shadow:0 1px 2px rgba(0,0,0,.5), 0 18px 40px -22px rgba(0,0,0,.8);
+    --slot-1:#332C22; --slot-2:#443829; --slot-3:#5C4A33;
+    --grain-o:.09; --grain-blend:overlay;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#131211; --paper-2:#191715; --card:#1E1B18;
+  --ink:#F0EBE1; --ink-2:#B6AC9D; --ink-3:#8A8072;
+  --line:#312D28; --line-2:#262320;
+  --inverse:#14120F;
+  --banner:#EFE9DD;
+  --ok:#7FBE74;
+  --shade:#1A1816;
+  --blur:rgba(19,18,17,.88);
+  --shadow:0 1px 2px rgba(0,0,0,.5), 0 18px 40px -22px rgba(0,0,0,.8);
+  --slot-1:#332C22; --slot-2:#443829; --slot-3:#5C4A33;
+  --grain-o:.09; --grain-blend:overlay;
+}
+
+/* ==========================================================================
+   base
+   ========================================================================== */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--sans); font-size:17px; line-height:1.65;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+body::after{
+  content:""; position:fixed; inset:0; z-index:9999; pointer-events:none;
+  background-image:var(--grain); background-size:150px 150px;
+  opacity:var(--grain-o); mix-blend-mode:var(--grain-blend);
+}
+h1,h2,h3,h4{margin:0; font-family:var(--heb); font-weight:700; line-height:1.2; text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2.5px solid var(--ink); outline-offset:3px}
+#svgdefs{position:absolute;width:0;height:0;overflow:hidden}
+
+.wrap{width:100%; max-width:var(--wrap); margin-inline:auto; padding-inline:var(--pad)}
+.measure{max-width:var(--measure)}
+.section{padding-block:clamp(3.25rem,8vw,6rem); scroll-margin-top:66px}
+.section--shade{background:var(--shade); border-block:1px solid var(--line-2)}
+
+/* the wordmark, rebuilt as live type so it stays crisp at any size */
+.wordmark{font-family:var(--display); font-weight:500; letter-spacing:.005em; line-height:1}
+.kicker{
+  font-family:var(--sans); font-weight:600; text-transform:uppercase;
+  letter-spacing:.34em; font-size:.66rem; color:var(--ink-3);
+}
+
+/* ==========================================================================
+   the painted banner: La Farina's signature identity element
+   ========================================================================== */
+.banner{
+  position:relative; display:inline-block; isolation:isolate;
+  padding:.34em 1.15em .4em; color:var(--inverse);
+  font-family:var(--heb); font-weight:700; line-height:1.3;
+}
+.banner::before{
+  content:""; position:absolute; inset:0; z-index:-1;
+  background:var(--banner); filter:url(#brush);
+}
+.banner > *{position:relative}
+.banner--sm{font-size:.98rem; letter-spacing:.01em}
+.banner--lg{font-size:clamp(1.05rem,3.4vw,1.3rem)}
+
+.eyebrow{
+  font-family:var(--sans); font-size:.68rem; font-weight:700;
+  letter-spacing:.24em; text-transform:uppercase; color:var(--ink-3);
+  display:flex; align-items:center; gap:.75rem; margin-bottom:1rem;
+}
+.eyebrow::after{content:""; height:1px; flex:1; max-width:4.5rem; background:var(--line)}
+.h2{font-size:clamp(1.7rem,5vw,2.5rem); letter-spacing:-.012em}
+.lede{color:var(--ink-2); margin-top:1rem; font-size:1.04rem}
+.lede + .lede{margin-top:.85rem}
+
+/* ==========================================================================
+   draft strip
+   ========================================================================== */
+#draft{background:var(--ink); color:var(--paper); font-size:.85rem}
+:root[data-theme="dark"] #draft, :root:not([data-theme="light"]) #draft{background:var(--card); color:var(--ink)}
+#draft .wrap{display:flex; align-items:center; gap:.85rem; padding-block:.6rem}
+#draft p{flex:1; line-height:1.45}
+#draft button{
+  flex:none; width:26px; height:26px; border-radius:50%; cursor:pointer;
+  background:transparent; border:1px solid currentColor; color:inherit;
+  font:inherit; font-size:15px; line-height:1;
+}
+#draft button:hover{background:rgba(255,255,255,.16)}
+
+/* ==========================================================================
+   header
+   ========================================================================== */
+header{
+  position:sticky; top:0; z-index:50; background:var(--blur);
+  backdrop-filter:saturate(1.3) blur(14px); -webkit-backdrop-filter:saturate(1.3) blur(14px);
+  border-bottom:1px solid var(--line-2);
+}
+header .wrap{display:flex; align-items:center; gap:1rem; height:64px}
+.brand{display:flex; align-items:center; gap:.65rem; text-decoration:none; flex:none}
+.brand img{width:36px; height:36px; display:block; border-radius:2px; box-shadow:var(--shadow)}
+.brand .wordmark{font-size:1.22rem}
+nav{display:flex; gap:1.6rem; margin-inline-start:auto; font-size:.93rem}
+nav a{text-decoration:none; color:var(--ink-2); position:relative; padding-block:.4rem}
+nav a::after{
+  content:""; position:absolute; inset-inline:0; bottom:.15rem; height:1.5px;
+  background:var(--ink); transform:scaleX(0); transition:transform .22s ease;
+}
+nav a:hover{color:var(--ink)}
+nav a:hover::after{transform:scaleX(1)}
+.hdr-tel{
+  display:none; align-items:center; gap:.45rem; flex:none; text-decoration:none;
+  background:var(--ink); color:var(--paper); padding:.5rem 1.05rem;
+  border-radius:2px; font-size:.88rem; font-weight:600;
+}
+:root[data-theme="dark"] .hdr-tel, :root:not([data-theme="light"]) .hdr-tel{background:var(--ink); color:var(--paper)}
+.hdr-tel span{direction:ltr}
+@media (min-width:861px){ .hdr-tel{display:inline-flex} }
+@media (max-width:860px){ nav{display:none} }
+
+/* ==========================================================================
+   photo slots: placeholders that double as the shot list
+   ========================================================================== */
+.slot{
+  position:relative; margin:0; overflow:hidden; border-radius:2px;
+  display:grid; place-items:center; isolation:isolate;
+  background:
+    radial-gradient(110% 85% at 80% 14%, var(--slot-1) 0%, transparent 56%),
+    radial-gradient(95% 105% at 10% 90%, var(--slot-3) 0%, transparent 60%),
+    linear-gradient(200deg, var(--slot-2), var(--slot-1));
+}
+.slot::before{
+  content:""; position:absolute; inset:9px; pointer-events:none;
+  border:1.5px dashed rgba(251,248,242,.4);
+}
+:root[data-theme="dark"] .slot::before, :root:not([data-theme="light"]) .slot::before{border-color:rgba(240,235,225,.2)}
+.slot-note{position:relative; text-align:center; padding:1.4rem; color:#2A2015; max-width:20rem}
+:root[data-theme="dark"] .slot-note, :root:not([data-theme="light"]) .slot-note{color:#EFE6D6}
+.slot-note svg{opacity:.45; margin-bottom:.4rem}
+.slot-note b{display:block; font-family:var(--heb); font-size:1rem}
+.slot-note span{display:block; font-size:.78rem; opacity:.75; line-height:1.5; margin-top:.15rem}
+
+/* ==========================================================================
+   hero: the dark truck at night
+   ========================================================================== */
+.hero{position:relative; background:#100E0C}
+.hero-media{position:relative; height:clamp(420px,72vh,620px)}
+.hero-media.slot{
+  background:
+    radial-gradient(60% 45% at 50% 18%, rgba(214,166,92,.22) 0%, transparent 70%),
+    radial-gradient(90% 70% at 20% 100%, rgba(120,86,48,.35) 0%, transparent 65%),
+    linear-gradient(180deg, #241C14 0%, #14100C 55%, #0C0A08 100%);
+}
+.hero-media.slot::before{border-color:rgba(232,205,160,.22)}
+.hero-media .slot-note{color:#E8DAC2}
+.lights{position:absolute; inset-inline:0; top:16%; height:120px; pointer-events:none}
+.lights i{
+  position:absolute; width:9px; height:9px; border-radius:50%;
+  background:#F0C579; box-shadow:0 0 16px 6px rgba(240,197,121,.45); opacity:.75;
+}
+.hero-body{position:absolute; inset-inline:0; bottom:0; z-index:3; padding-bottom:clamp(1.75rem,4.5vw,3rem)}
+.hero-body .wrap{display:flex; flex-direction:column; align-items:flex-start}
+.hero h1{
+  font-family:var(--display); font-weight:500; color:#FBF8F2;
+  font-size:clamp(3rem,13vw,6rem); line-height:.98; letter-spacing:-.01em;
+  margin-bottom:.55rem; text-shadow:0 3px 30px rgba(0,0,0,.55);
+}
+.hero .kicker{color:#D9C7A8; margin-bottom:1.15rem}
+.hero-tag{
+  font-family:var(--sans); font-weight:600; font-size:.74rem;
+  letter-spacing:.22em; text-transform:uppercase;
+  color:#100E0C; background:#FBF8F2; padding:.42rem 1.1rem; border-radius:2px;
+  display:inline-block; margin-bottom:1.35rem;
+}
+.hero-sub{max-width:30rem; color:#E4D8C4; line-height:1.6; text-shadow:0 1px 14px rgba(0,0,0,.6)}
+.hero-actions{display:flex; flex-wrap:wrap; gap:.65rem; margin-top:1.5rem}
+.status{
+  display:inline-flex; align-items:center; gap:.5rem; margin-bottom:1.1rem;
+  background:rgba(16,14,12,.5); border:1px solid rgba(251,248,242,.3);
+  backdrop-filter:blur(8px); padding:.34rem .85rem; border-radius:2px;
+  font-size:.8rem; font-weight:600; color:#FBF8F2;
+}
+.dot{width:7px; height:7px; border-radius:50%; flex:none; background:#7FBE74; box-shadow:0 0 0 4px rgba(127,190,116,.22)}
+.status[data-open="false"] .dot{background:#D9A441; box-shadow:0 0 0 4px rgba(217,164,65,.2)}
+
+/* ==========================================================================
+   buttons
+   ========================================================================== */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  padding:.75rem 1.5rem; border-radius:2px; text-decoration:none; cursor:pointer;
+  font-family:var(--sans); font-weight:600; font-size:.94rem;
+  border:1.5px solid transparent; transition:background .18s, color .18s, border-color .18s, transform .14s;
+}
+.btn:active{transform:translateY(1px)}
+.btn-solid{background:var(--ink); color:var(--paper)}
+.btn-solid:hover{background:var(--ink-2)}
+.btn-light{background:#FBF8F2; color:#100E0C}
+.btn-light:hover{background:#EADFCB}
+.btn-outline-light{border-color:rgba(251,248,242,.45); color:#FBF8F2}
+.btn-outline-light:hover{background:rgba(251,248,242,.14)}
+.btn-outline{border-color:var(--line); color:var(--ink); background:var(--card)}
+.btn-outline:hover{border-color:var(--ink)}
+
+/* ==========================================================================
+   about
+   ========================================================================== */
+.about{display:grid; gap:clamp(1.75rem,5vw,3.5rem); grid-template-columns:1fr; align-items:center}
+@media (min-width:821px){ .about{grid-template-columns:1.05fr .95fr} }
+.about .slot{aspect-ratio:4/5; box-shadow:var(--shadow)}
+.claims{display:flex; flex-wrap:wrap; gap:.5rem; list-style:none; padding:0; margin:1.6rem 0 0}
+.claims li{
+  font-size:.83rem; font-weight:600; color:var(--ink-2);
+  border:1px solid var(--line); background:var(--card); padding:.3rem .85rem; border-radius:2px;
+}
+
+/* ==========================================================================
+   menu
+   ========================================================================== */
+.menu-head{display:flex; flex-wrap:wrap; gap:1rem; align-items:flex-end; justify-content:space-between}
+.cats{margin-top:2.5rem; display:grid; gap:2.25rem clamp(2rem,5vw,3.5rem); grid-template-columns:1fr}
+@media (min-width:700px){ .cats{grid-template-columns:1fr 1fr} }
+@media (min-width:1060px){ .cats{grid-template-columns:1fr 1fr 1fr} }
+.cat{break-inside:avoid}
+.cat-head{display:flex; align-items:baseline; gap:.6rem; flex-wrap:wrap; margin-bottom:.35rem}
+.cat-head .flat{font-size:.78rem; font-weight:700; color:var(--ink-3); letter-spacing:.04em}
+.items{list-style:none; margin:0; padding:0}
+.item{display:flex; align-items:baseline; gap:.45rem; padding-block:.55rem; border-bottom:1px solid var(--line-2)}
+.item:last-child{border-bottom:0}
+.item-main{flex:none; max-width:74%}
+.item-name{display:block; font-weight:600; line-height:1.35}
+.item-desc{display:block; font-size:.79rem; color:var(--ink-3); line-height:1.45}
+.leader{flex:1; min-width:1.2rem; border-bottom:1.5px dotted var(--line); transform:translateY(-.28rem)}
+.price{flex:none; font-weight:700; font-variant-numeric:tabular-nums}
+.menu-note{margin-top:2rem; font-size:.85rem; color:var(--ink-3); max-width:44rem}
+
+/* ==========================================================================
+   gallery
+   ========================================================================== */
+.gallery{display:grid; gap:.8rem; grid-template-columns:repeat(2,1fr); margin-top:2.25rem}
+@media (min-width:821px){ .gallery{grid-template-columns:repeat(3,1fr); gap:1rem} }
+.gallery .slot{aspect-ratio:1; box-shadow:var(--shadow)}
+.gallery .slot:nth-child(1){grid-column:span 2}
+@media (min-width:821px){ .gallery .slot:nth-child(1){grid-row:span 2; aspect-ratio:auto} }
+
+/* ==========================================================================
+   visit
+   ========================================================================== */
+.visit{display:grid; gap:clamp(1.75rem,5vw,3.25rem); grid-template-columns:1fr; align-items:start}
+@media (min-width:821px){ .visit{grid-template-columns:.85fr 1.15fr} }
+.hours{list-style:none; margin:1.5rem 0 0; padding:0; border-top:1px solid var(--line)}
+.hours li{
+  display:flex; justify-content:space-between; gap:1rem; align-items:baseline;
+  padding-block:.6rem; border-bottom:1px solid var(--line-2); font-variant-numeric:tabular-nums;
+}
+.hours li[data-today="true"]{font-weight:700}
+.hours li[data-today="true"] .day::before{content:"◂ "; font-size:.75em}
+.hours .day{font-weight:600}
+.hours .shut{color:var(--ink-3); font-weight:400}
+.addr{font-family:var(--heb); font-size:1.35rem; margin-top:.5rem}
+.map{
+  position:relative; margin-top:1.25rem; height:clamp(220px,32vw,290px);
+  border:1px solid var(--line); background:var(--paper-2); overflow:hidden; border-radius:2px;
+}
+.map::before{
+  content:""; position:absolute; inset:0; opacity:.55;
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0 48px, var(--line) 48px 50px),
+    repeating-linear-gradient(90deg, transparent 0 66px, var(--line) 66px 68px),
+    linear-gradient(108deg, transparent 0 43%, var(--line) 43% 46.5%, transparent 46.5%);
+}
+.pin{
+  position:absolute; top:50%; left:50%; width:32px; height:32px;
+  transform:translate(-50%,-64%) rotate(-45deg);
+  background:var(--ink); border-radius:50% 50% 50% 3px; box-shadow:var(--shadow);
+}
+.pin::after{content:""; position:absolute; inset:10px; background:var(--paper); border-radius:50%}
+.map-cap{
+  position:absolute; inset-inline:0; bottom:0; padding:.8rem 1rem;
+  background:var(--blur); backdrop-filter:blur(10px);
+  border-top:1px solid var(--line); font-size:.83rem; color:var(--ink-2);
+}
+.nav-btns{display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1rem}
+
+/* ==========================================================================
+   good to know
+   ========================================================================== */
+.know{margin-top:2.25rem; display:grid; gap:1.6rem 2.25rem; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))}
+.know > div{display:flex; gap:.85rem; align-items:flex-start}
+.know svg{flex:none; margin-top:.2rem; color:var(--ink)}
+.know b{display:block; font-size:.95rem}
+.know p{font-size:.87rem; color:var(--ink-2); line-height:1.55}
+.know em{font-style:normal; color:var(--ink-3); font-size:.9em}
+
+/* ==========================================================================
+   events
+   ========================================================================== */
+.events{display:grid; gap:clamp(1.75rem,5vw,3rem); grid-template-columns:1fr; align-items:center}
+@media (min-width:821px){ .events{grid-template-columns:1.05fr .95fr} }
+.events .slot{aspect-ratio:16/10; box-shadow:var(--shadow)}
+
+/* ==========================================================================
+   footer
+   ========================================================================== */
+footer{background:var(--ink); color:var(--paper); padding-block:3.25rem 2rem}
+:root[data-theme="dark"] footer, :root:not([data-theme="light"]) footer{background:var(--card); color:var(--ink)}
+footer .wordmark{font-size:1.6rem; color:inherit}
+.foot{display:grid; gap:2.25rem; grid-template-columns:repeat(auto-fit,minmax(12rem,1fr))}
+.foot h4{font-family:var(--heb); font-size:1rem; margin-bottom:.7rem; opacity:.95}
+.foot p, .foot a{font-size:.89rem; opacity:.72; text-decoration:none; display:block; line-height:1.85}
+.foot a:hover{opacity:1; text-decoration:underline; text-underline-offset:3px}
+.foot .row{display:flex; justify-content:space-between; gap:.75rem; max-width:11.5rem; opacity:.72; font-size:.85rem}
+.social{display:flex; gap:.55rem; margin-top:.9rem}
+.social a{
+  width:40px; height:40px; border-radius:2px; display:grid; place-items:center; opacity:1;
+  border:1px solid rgba(251,248,242,.28); transition:background .18s, color .18s;
+}
+:root[data-theme="dark"] .social a, :root:not([data-theme="light"]) .social a{border-color:var(--line)}
+.social a:hover{background:var(--paper); color:var(--ink)}
+:root[data-theme="dark"] .social a:hover, :root:not([data-theme="light"]) .social a:hover{background:var(--ink); color:var(--paper)}
+.colophon{
+  margin-top:2.5rem; padding-top:1.25rem; border-top:1px solid rgba(251,248,242,.2);
+  display:flex; flex-wrap:wrap; gap:.5rem 1.25rem; justify-content:space-between;
+  font-size:.76rem; opacity:.6;
+}
+:root[data-theme="dark"] .colophon, :root:not([data-theme="light"]) .colophon{border-top-color:var(--line)}
+
+/* ==========================================================================
+   mobile action bar
+   ========================================================================== */
+.bar{
+  position:fixed; inset-inline:0; bottom:0; z-index:60; display:none; gap:.4rem;
+  background:var(--blur); backdrop-filter:blur(16px); border-top:1px solid var(--line);
+  padding:.5rem .5rem calc(.5rem + env(safe-area-inset-bottom));
+}
+.bar a{
+  flex:1; display:flex; flex-direction:column; align-items:center; gap:.16rem;
+  text-decoration:none; color:var(--ink); padding:.45rem .2rem; border-radius:2px;
+  font-size:.71rem; font-weight:600;
+}
+.bar a.primary{background:var(--ink); color:var(--paper)}
+.bar a:active{background:var(--line-2)}
+.bar a.primary:active{background:var(--ink-2)}
+@media (max-width:860px){ .bar{display:flex} body{padding-bottom:78px} }
+
+/* ==========================================================================
+   reveal
+   ========================================================================== */
+.reveal{opacity:0; transform:translateY(12px)}
+.reveal.in{opacity:1; transform:none; transition:opacity .65s ease, transform .65s cubic-bezier(.22,.7,.3,1)}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1; transform:none; transition:none}
+  *{animation-duration:.01ms !important; transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+
+
+<svg id="svgdefs" aria-hidden="true" focusable="false">
+  <filter id="brush" x="-6%" y="-25%" width="112%" height="150%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.03 0.13" numOctaves="3" seed="9" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<div id="app" dir="rtl" lang="he">
+
+<!-- ===================== draft strip ===================== -->
+<div id="draft">
+  <div class="wrap">
+    <p><strong>טיוטה.</strong> התפריט, השעות והכתובת אמיתיים, מתוך התפריט ששלחתם. חסרים עדיין: טלפון, קישורי רשתות, כשרות ותמונות אמיתיות.</p>
+    <button type="button" aria-label="סגירת ההודעה">×</button>
+  </div>
+</div>
+
+<!-- ===================== header ===================== -->
+<header>
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <img src="data:image/jpeg;base64,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ImvoxkCrHdl6BFWqUn1O3cpROT3ks/1DDWmVr3+Yu5IDZlqoKlpa74Zq6VZbyxh0WoaZn336eftHE5rt4ESxMALWa1YczycPtG4tkOyogbMMWbKtAzjeVxXcFRzO38eVh+i/R4uU3Dh2suwjy2q0xr2ywJtqrbgV3uZfFAGpqK8at157dylEv+hitHF9kMsIhsp6yY1mDqxiNy6K4XHKwEGYUxelzQcf0eYk3vYDoQ87sOR3gcRpKX0yuRLhx+cvHgpYT13+KluMjRg18mG7ljUwxM8gp3C1FEvWnKu3zUwrYuF9TmIti8I9Dwy1VaBb5aSlhIaJaBGKhShg1rR46x5j/hIlreWLnPMqWYF/7Uqxcu3AYsu/aI5O7UPT/saRxr9NzEsArC0dN5XzdEVYsdwRZ1z1mEBE4HWov6rmu1DYl8wKhzdSoVuaCP2INFKiA9kwf3rOiswswMEPDZUC9dqqcW/pKgiwaX7kLrtd4L+NL//aAAwDAAABEQIRAAAQ88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888840888848488888888888swc888sAEc888U8888888E8oE88Uw4AoIEYkA4888UoIA48gkQ4E88UkUMc888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888/8QAFBEBAAAAAAAAAAAAAAAAAAAAgP/aAAgBAhEBPxBIf//EABQRAQAAAAAAAAAAAAAAAAAAAID/2gAIAQERAT8QSH//xAApEAEBAAICAQMDBAIDAAAAAAABEQAhMUFRYXGBEDCRIEDB8JCh0eHx/9oACAEAAAE/EP8AC2oEICq+hnKLrX/DkfacUb/rCrCUW087+yyVheevMNYKUU8/9GCcf2fTIW6ef/DNd/qe2B0Ah7nmP7cNimiThE4cNCKA7MkCtHy5mB4/KE9h2dZx6uCTJBQeKvH2QVyFCGlnPs5snM0grTzUNb1MJJQTgNlqXlXPKfQU8KImR11ehDS2/I5DnCOwbuSns/YYFvM1U/HA3+cXRjiXkHuI/vSggwA249p+dznogo83HSUsVuAu9oen2FTda2pSTV3HvKf5KQV4OjoPT9oUE5xUT7etkO3fjq3FFZLioIoFSxUuVVTKsl8js6PbX6RlV+RERxC9dGEWTADxVlOb2k5K39CMUndqf3vrKYKK8peJB3wDmuTQ8NSCGkRiR8TKgn8IMTPf+HKAme2IHE0zetb2Kr8Ye0ySAtO5CGgfZzgwu7GaQt8c5awSKYFZqDTvfGHgDtVEhXthlAqgRB2AA77TK1v4AUsAMTV98OXk2cchbnp+MMEv0gFdDpQROxFPo+Nj8Ir7puHzMVWlEJ7hF3KL84BDEp9g9UJvh6n2Cn+7/RIBsDZxD0ZrDc0OSBRerrjbkb0ZjXD9bQYYbG4hFHCPnB7hu2uL4WX5xWU2LK2wkdZy4ImsrrCJCoI4f3Xni31ejKQT2RTAUWAxUUOrKGJwopmIBCC9nxiWBpVRqvquNVwbULXuQfH0ADYw7xqSe4fjJjp5IKEcm2sYEkMQaI4l8jmCiDja36IgEvBTo7t+hwGMJmRQdlM5/wBgWmrboXr6S+PpEeAOXIZIPAUimiqByXcLgRCH0HQddDMMpd1upPPGg0VOe8FBCMEE7Pf6iBh36FXN6DbRB59hZtnWqOA0rCLfBTyfbAhiiRD4NGg4xAvIH++cBV4D2YSFB152v8fX+5Rr+foASvCr41fzh8APlAOCAdswo83+BH8Z6njkSB+XGnhnRRwMcietdYCRHxcbK/iYvTJMYy9fpUwNID1CC+6ZpFX3JBJAFAa2rXArTAhJZRLXTJ4MEBnLJ+VT8ZV4DcXmR7Qze4lecjZmxcReU4yBEfMWeuH8oAJ0A1p8h8rSX2U5jdMhp43ln/r0D2K4GG585TaUXXgBwQ+gGuhTNdisj1LhE78+Z24bttreclJY0mB7GwsXHnX02Djlu1rFLvX8YJ93aA7qe7BxqRoaRQpsARnDnmENNxet3BX16wAKK2Qgnaod9s245u6iBT89uWXjwD6vtfPWQFYmwtivGsiUEPAi1S71vjAg5Y5lbFRvA+cXLIsfAGkLDeDlkeIlYHlxxxkKDCAFQ4Vx6emSTeH29UAEU9s0nXQUR5DRPMmCuCmYB7QIuz81LxGH3exCa7euJr2GwFrWCE0us34xmUsQrzy/40v/2Q==" alt="La Farina" width="36" height="36">
+      <span class="wordmark">La Farina</span>
+    </a>
+    <nav>
+      <a href="#menu">תפריט</a>
+      <a href="#gallery">גלריה</a>
+      <a href="#visit">שעות ומיקום</a>
+      <a href="#events">אירועים</a>
+    </nav>
+    <a class="hdr-tel" id="hdr-tel" href="#">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.4 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+      <span id="hdr-tel-text">התקשרו</span>
+    </a>
+  </div>
+</header>
+
+<!-- ===================== hero ===================== -->
+<section class="hero" id="top">
+  <figure class="slot hero-media">
+    <div class="lights" aria-hidden="true"></div>
+    <figcaption class="slot-note">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h2l1.5-2h7L17 6h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><circle cx="12" cy="13" r="3.6"/></svg>
+      <b>תמונת נושא: הפוד טראק</b>
+      <span>לרוחב · הטראק פתוח, האורות דולקים, ערב או שעת בין ערביים</span>
+    </figcaption>
+  </figure>
+  <div class="hero-body">
+    <div class="wrap">
+      <div class="status" id="status" data-open="true">
+        <span class="dot" aria-hidden="true"></span><span id="status-text">טוען…</span>
+      </div>
+      <h1 class="wordmark">La Farina</h1>
+      <p class="kicker">Food Truck</p>
+      <p class="hero-tag">Coffee &nbsp;•&nbsp; Food &nbsp;•&nbsp; Good Vibes</p>
+      <p class="hero-sub">קפה איכותי, כריכים ומאפים טריים, ואווירה טובה. במרכז לידר, גני תקווה.</p>
+      <div class="hero-actions">
+        <a class="btn btn-light" href="#menu">לתפריט המלא</a>
+        <a class="btn btn-outline-light" id="hero-nav" href="#" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          ניווט אלינו
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== about ===================== -->
+<section class="section" id="about">
+  <div class="wrap about">
+    <div class="reveal">
+      <p class="eyebrow">עלינו</p>
+      <h2 class="h2">פוד טראק אחד, כל היום</h2>
+      <p class="lede">
+        לה פארינה הוא פוד טראק שעומד במרכז לידר בגני תקווה ופותח כבר בשבע וחצי בבוקר.
+        מתחילים בקפה ובקרואסון חם, ממשיכים לכריך או סלט בצהריים, ונשארים פתוחים עד הערב.
+      </p>
+      <p class="lede">
+        הכול נעשה במקום ובהזמנה: הכריכים נבנים מולכם, הקפה נטחן לכוס, והמאפים מגיעים טריים כל בוקר.
+        בלי מלצרים ובלי המתנות ארוכות. פשוט אוכל טוב וקפה טוב, בדרך.
+      </p>
+      <ul class="claims">
+        <li>פתוח מהשעה 07:30</li>
+        <li>כריכים בהזמנה</li>
+        <li>מאפים טריים כל בוקר</li>
+        <li>קח ואכול</li>
+      </ul>
+    </div>
+    <figure class="slot reveal">
+      <figcaption class="slot-note">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h2l1.5-2h7L17 6h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><circle cx="12" cy="13" r="3.6"/></svg>
+        <b>תמונה לצד הטקסט</b>
+        <span>לאורך · כריך בהכנה, קפה נמזג, או פרט מהדלפק</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================== menu ===================== -->
+<section class="section section--shade" id="menu">
+  <div class="wrap">
+    <div class="menu-head reveal">
+      <div class="measure">
+        <p class="eyebrow">התפריט</p>
+        <h2 class="h2">מה יש אצלנו</h2>
+      </div>
+      <p style="margin:0; font-size:.85rem; color:var(--ink-3)">המחירים בשקלים · כולל מע״מ</p>
+    </div>
+    <div class="cats" id="cats"></div>
+    <p class="menu-note reveal" id="menu-note"></p>
+  </div>
+</section>
+
+<!-- ===================== gallery ===================== -->
+<section class="section" id="gallery">
+  <div class="wrap">
+    <div class="measure reveal">
+      <p class="eyebrow">גלריה</p>
+      <h2 class="h2">רגע אצלנו</h2>
+      <p class="lede">שש תמונות שמספרות את כל הסיפור: הטראק, מה שיוצא ממנו, והאנשים סביבו.</p>
+    </div>
+    <div class="gallery" id="gallery-grid"></div>
+  </div>
+</section>
+
+<!-- ===================== visit ===================== -->
+<section class="section section--shade" id="visit">
+  <div class="wrap visit">
+    <div class="reveal">
+      <p class="eyebrow">שעות פתיחה</p>
+      <h2 class="h2">מתי פתוח</h2>
+      <ul class="hours" id="hours"></ul>
+      <p style="margin-top:1rem; font-size:.85rem; color:var(--ink-3)">בערבי חג ובחגים ייתכנו שינויים. נעדכן כאן ובאינסטגרם.</p>
+    </div>
+    <div class="reveal">
+      <p class="eyebrow">איפה אנחנו</p>
+      <h2 class="h2">מרכז לידר, גני תקווה</h2>
+      <p class="addr">מרכז לידר, גני תקווה</p>
+      <p class="lede" style="font-size:.95rem">הטראק חונה במרכז. אפשר להגיע ברגל מכל השכונה, ויש חניה צמודה.</p>
+      <div class="map" role="img" aria-label="מפה סכמטית של מיקום הפוד טראק במרכז לידר, גני תקווה">
+        <span class="pin" aria-hidden="true"></span>
+        <div class="map-cap">באתר החי כאן תוטמע מפת Google אמיתית עם הפין המדויק שלכם.</div>
+      </div>
+      <div class="nav-btns">
+        <a class="btn btn-solid" id="btn-waze" href="#" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 22 2l-9 19-2-8-8-2Z"/></svg>
+          ניווט ב-Waze
+        </a>
+        <a class="btn btn-outline" id="btn-gmaps" href="#" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Google Maps
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== good to know ===================== -->
+<section class="section" id="know">
+  <div class="wrap">
+    <div class="measure reveal">
+      <p class="eyebrow">טוב לדעת</p>
+      <h2 class="h2">לפני שאתם מגיעים</h2>
+    </div>
+    <div class="know reveal">
+      <div>
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 17V7h3.5a3 3 0 0 1 0 6H9"/></svg>
+        <div><b>חניה</b><p>חניה צמודה במרכז לידר. <em>(להשלמה: חינם? בתשלום? כמה מקומות?)</em></p></div>
+      </div>
+      <div>
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.5" r="1.8"/><path d="M6 8.5h12M12 8.5v6m0 0 4 5m-4-5-4 5"/></svg>
+        <div><b>נגישות</b><p>גישה במפלס אחד, ללא מדרגות. <em>(להשלמה, לאשר)</em></p></div>
+      </div>
+      <div>
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 3.5 6v6c0 5 3.6 8.7 8.5 10 4.9-1.3 8.5-5 8.5-10V6Z"/><path d="m9 12 2 2 4-4"/></svg>
+        <div><b>כשרות</b><p><em>[שם הרבנות / הבד״ץ, להשלמה]</em>. תעודה בתוקף מוצגת בטראק.</p></div>
+      </div>
+      <div>
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18v-7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v7M4 15h16M7 21v-3m10 3v-3"/></svg>
+        <div><b>ישיבה</b><p>שולחנות בחוץ לצד הטראק. <em>(להשלמה: כמה? מקורה?)</em></p></div>
+      </div>
+      <div>
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19"/></svg>
+        <div><b>תשלום</b><p>מזומן, אשראי, ביט ואפליקציות תשלום. <em>(להשלמה)</em></p></div>
+      </div>
+      <div>
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="M12 7.5v5l3 2"/></svg>
+        <div><b>הזמנה מראש</b><p>שולחים הודעה בוואטסאפ ומקבלים הכול מוכן בדלפק, בלי לחכות.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== events ===================== -->
+<section class="section section--shade" id="events">
+  <div class="wrap events">
+    <div class="reveal">
+      <p class="eyebrow">אירועים פרטיים</p>
+      <h2 class="h2">מביאים את הטראק אליכם</h2>
+      <p class="lede">
+        ימי הולדת, אירועי חברה, ברית, כנס בוקר או יום צילומים. הטראק מגיע אליכם עם בר קפה מלא,
+        מאפים טריים וכריכים במקום. אתם רק אומרים איפה ומתי.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-solid" id="wa-event" href="#" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.3.1-.5.2-.7l.4-.5c.1-.2.1-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3c-.3.3-.9.9-.9 2.1s.9 2.5 1.1 2.6a9.6 9.6 0 0 0 4 3.5c1.6.6 1.9.5 2.3.5.4 0 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1Z"/></svg>
+          לפרטים בוואטסאפ
+        </a>
+        <a class="btn btn-outline" id="tel-event" href="#">התקשרו אלינו</a>
+      </div>
+    </div>
+    <figure class="slot reveal">
+      <figcaption class="slot-note">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h2l1.5-2h7L17 6h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><circle cx="12" cy="13" r="3.6"/></svg>
+        <b>תמונה מאירוע</b>
+        <span>הטראק באירוע · אנשים סביבו · או בר קפה ערוך</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================== footer ===================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <p class="wordmark" style="opacity:1; margin-bottom:.3rem">La Farina</p>
+        <p class="kicker" style="opacity:.6">Food Truck</p>
+        <p style="margin-top:.75rem">קפה איכותי, כריכים<br>ומאפים טריים.</p>
+        <div class="social">
+          <a href="#" target="_blank" rel="noopener" aria-label="אינסטגרם">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" target="_blank" rel="noopener" aria-label="פייסבוק">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 9V7.2c0-.8.2-1.2 1.4-1.2H17V3h-2.6C11.5 3 10.5 4.5 10.5 7v2H8.5v3h2v9h3.5v-9h2.4l.3-3Z"/></svg>
+          </a>
+          <a id="foot-wa" href="#" target="_blank" rel="noopener" aria-label="וואטסאפ">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.3.1-.5.2-.7l.4-.5c.1-.2.1-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3c-.3.3-.9.9-.9 2.1s.9 2.5 1.1 2.6a9.6 9.6 0 0 0 4 3.5c1.6.6 1.9.5 2.3.5.4 0 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1Z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4>מיקום</h4>
+        <p>מרכז לידר<br>גני תקווה</p>
+        <a id="foot-nav" href="#" target="_blank" rel="noopener">ניווט אלינו ←</a>
+      </div>
+      <div>
+        <h4>שעות</h4>
+        <div id="foot-hours"></div>
+      </div>
+      <div>
+        <h4>יצירת קשר</h4>
+        <a id="foot-tel" href="#" dir="ltr" style="text-align:start">050-000-0000</a>
+        <a id="foot-wa2" href="#" target="_blank" rel="noopener">וואטסאפ</a>
+        <a href="#events">אירועים פרטיים</a>
+        <a href="#menu">תפריט</a>
+      </div>
+    </div>
+    <div class="colophon">
+      <span>© <span id="year"></span> La Farina · כל הזכויות שמורות</span>
+      <span>טיוטה. חלק מהפרטים להמחשה בלבד</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== mobile bar ===================== -->
+<div class="bar">
+  <a id="bar-tel" class="primary" href="#">
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.4 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+    התקשרו
+  </a>
+  <a id="bar-wa" href="#" target="_blank" rel="noopener">
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.3.1-.5.2-.7l.4-.5c.1-.2.1-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3c-.3.3-.9.9-.9 2.1s.9 2.5 1.1 2.6a9.6 9.6 0 0 0 4 3.5c1.6.6 1.9.5 2.3.5.4 0 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1Z"/></svg>
+    וואטסאפ
+  </a>
+  <a id="bar-nav" href="#" target="_blank" rel="noopener">
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+    ניווט
+  </a>
+</div>
+
+</div>
+
+<script>
+/* ============================================================================
+   ⬇⬇⬇  כל התוכן של האתר נמצא כאן. זה החלק היחיד שצריך לערוך.  ⬇⬇⬇
+   ============================================================================ */
+const SITE = {
+
+  /* --- יצירת קשר  [להשלמה] ------------------------------------------ */
+  phoneDisplay: "050-000-0000",
+  phoneIntl:    "+972500000000",
+  waMessage:    "היי לה פארינה! אשמח להזמין…",
+
+  /* --- מיקום --------------------------------------------------------- */
+  address:   "מרכז לידר, גני תקווה",
+  mapsQuery: "מרכז לידר גני תקווה",
+
+  /* --- שעות פתיחה (0 = ראשון … 6 = שבת). null = סגור ------------------ */
+  hours: [
+    { open:"07:30", close:"21:00" },  // ראשון
+    { open:"07:30", close:"21:00" },  // שני
+    { open:"07:30", close:"21:00" },  // שלישי
+    { open:"07:30", close:"21:00" },  // רביעי
+    { open:"07:30", close:"21:00" },  // חמישי
+    { open:"07:00", close:"17:00" },  // שישי
+    null                              // שבת  [לאשר]
+  ],
+
+  /* --- התפריט (מתוך התפריט המודפס) ----------------------------------- */
+  menu: [
+    { name:"קפה", items:[
+      { n:"אספרסו", p:8 },
+      { n:"הפוך קטן", p:12 },
+      { n:"הפוך גדול", p:15 },
+      { n:"אמריקנו קטן", p:12 },
+      { n:"אמריקנו גדול", p:15 },
+      { n:"קפה קר", p:17 },
+      { n:"אייס קפה", p:17 }
+    ]},
+    { name:"מאפים", items:[
+      { n:"קרואסון חמאה", p:16 },
+      { n:"קרואסון שוקולד", p:16 },
+      { n:"קרואסון נוטלה", p:19 },
+      { n:"קרואסון פיסטוק", p:19 },
+      { n:"דונאטס", p:12 },
+      { n:"קאפ קייק", p:18 },
+      { n:"פרוסת עוגת שוקולד", p:19 }
+    ]},
+    { name:"כריכים", flat:"הכול ₪35", items:[
+      { n:"כריך מוצרלה", p:35 },
+      { n:"כריך טונה", p:35 },
+      { n:"כריך אבוקדו", p:35 },
+      { n:"כריך סלט ביצים", p:35 },
+      { n:"כריך סלמון", p:35 }
+    ]},
+    { name:"בורקס", items:[
+      { n:"בורקס גבינה", p:19 },
+      { n:"בורקס פיצה", p:24 },
+      { n:"בורקס גבינה, זיתים ופטריות", p:24 }
+    ]},
+    { name:"סלטים", flat:"הכול ₪40", items:[
+      { n:"סלט טונה", d:"עגבנייה, מלפפון, טונה, חסה, שמן זית, גבינה קשה", p:40 },
+      { n:"סלט יווני", d:"עגבנייה, מלפפון, בצל סגול, שמן זית, גבינה בולגרית", p:40 },
+      { n:"סלט מוצרלה", d:"עגבנייה, מלפפון, מוצרלה, חסה, שמן זית, בלסמי", p:40 }
+    ]},
+    { name:"פיצות", items:[
+      { n:"פיצה אישית", p:32 },
+      { n:"פיצה משפחתית", p:45 }
+    ]},
+    { name:"שייקים", flat:"הכול ₪30", items:[
+      { n:"Berry Boost", d:"תות, פירות יער, אננס, בננה", p:30, ltr:true },
+      { n:"Sunset", d:"אננס, בננה, מנגו", p:30, ltr:true },
+      { n:"Green Energy", d:"מלון, מלפפון, נענע, מיץ לימון", p:30, ltr:true },
+      { n:"Coffee Kick", d:"בננה, אספרסו, סחלב, שקדים", p:30, ltr:true }
+    ]},
+    { name:"שתייה קרה", items:[
+      { n:"מים", p:8 },
+      { n:"מים בטעמים", p:12 },
+      { n:"סודה", p:10 },
+      { n:"פפסי", p:10 },
+      { n:"פפסי מקס", p:10 },
+      { n:"אקסל", p:10 },
+      { n:"סבן אפ", p:10 },
+      { n:"סבן אפ זירו", p:10 },
+      { n:"תות בננה", p:12 },
+      { n:"אייס בטעם ענבים", p:12 },
+      { n:"אייס בטעם לימונדה", p:12 }
+    ]}
+  ],
+
+  menuNote: "התפריט מבוסס על התפריט המודפס שלכם. אם משהו השתנה (מחיר, פריט או קטגוריה) אפשר לעדכן כאן בשורה אחת.",
+
+  /* --- הגלריה: מה לצלם לכל משבצת -------------------------------------- */
+  gallery: [
+    { t:"הפוד טראק",        s:"לרוחב, האורות דולקים, הטראק פתוח" },
+    { t:"קרואסונים",        s:"מקרוב, שכבות נראות" },
+    { t:"קפה עם ציור חלב",   s:"מלמעלה, כוס בידיים" },
+    { t:"כריך בהכנה",       s:"ידיים, קרש, רכיבים טריים" },
+    { t:"האווירה",          s:"לקוחות ליד הטראק, אור טבעי" },
+    { t:"פרט מהדלפק",       s:"מכונת הקפה, השלט, הלוגו על הטראק" }
+  ]
+};
+/* ============================================================================
+   ⬆⬆⬆  סוף אזור התוכן.  ⬆⬆⬆
+   ============================================================================ */
+
+(function () {
+  const $  = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const DAYS = ["ראשון","שני","שלישי","רביעי","חמישי","שישי","שבת"];
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
+
+  document.documentElement.dir  = "rtl";
+  document.documentElement.lang = "he";
+
+  /* ---------- links ---------- */
+  const tel   = "tel:" + SITE.phoneIntl;
+  const wa    = "https://wa.me/" + SITE.phoneIntl.replace(/\D/g, "") + "?text=" + encodeURIComponent(SITE.waMessage);
+  const gmaps = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(SITE.mapsQuery);
+  const waze  = "https://waze.com/ul?q=" + encodeURIComponent(SITE.mapsQuery) + "&navigate=yes";
+
+  const link = (id, href, text) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.href = href;
+    if (text != null) el.textContent = text;
+  };
+  link("hdr-tel", tel);  $("#hdr-tel-text").textContent = SITE.phoneDisplay;
+  link("bar-tel", tel);
+  link("tel-event", tel);
+  link("foot-tel", tel, SITE.phoneDisplay);
+  link("bar-wa", wa); link("wa-event", wa); link("foot-wa", wa); link("foot-wa2", wa);
+  link("hero-nav", waze); link("bar-nav", waze); link("btn-waze", waze);
+  link("btn-gmaps", gmaps); link("foot-nav", gmaps);
+
+  /* ---------- menu ---------- */
+  $("#cats").innerHTML = SITE.menu.map(cat => `
+    <div class="cat reveal">
+      <div class="cat-head">
+        <h3 class="banner banner--lg"><span>${esc(cat.name)}</span></h3>
+        ${cat.flat ? `<span class="flat">${esc(cat.flat)}</span>` : ""}
+      </div>
+      <ul class="items">
+        ${cat.items.map(i => `
+          <li class="item">
+            <span class="item-main">
+              <span class="item-name"${i.ltr ? ' dir="ltr" style="text-align:start"' : ""}>${esc(i.n)}</span>
+              ${i.d ? `<span class="item-desc">${esc(i.d)}</span>` : ""}
+            </span>
+            <span class="leader" aria-hidden="true"></span>
+            <span class="price" dir="ltr">₪${i.p}</span>
+          </li>`).join("")}
+      </ul>
+    </div>`).join("");
+  $("#menu-note").textContent = SITE.menuNote;
+
+  /* ---------- gallery ---------- */
+  const cam = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h2l1.5-2h7L17 6h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><circle cx="12" cy="13" r="3.6"/></svg>`;
+  $("#gallery-grid").innerHTML = SITE.gallery.map(g => `
+    <figure class="slot reveal">
+      <figcaption class="slot-note">${cam}<b>${esc(g.t)}</b><span>${esc(g.s)}</span></figcaption>
+    </figure>`).join("");
+
+  /* ---------- string lights in the hero ---------- */
+  const lights = $(".lights");
+  if (lights) {
+    let html = "";
+    for (let i = 0; i < 16; i++) {
+      const x = (i + .5) / 16 * 100;
+      const y = 30 + Math.sin(i / 15 * Math.PI) * 46;
+      html += `<i style="left:${x.toFixed(2)}%; top:${y.toFixed(0)}px; animation-delay:${i * 90}ms"></i>`;
+    }
+    lights.innerHTML = html;
+  }
+
+  /* ---------- Israel-time clock ---------- */
+  function israelNow() {
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: "Asia/Jerusalem", hour12: false,
+      weekday: "short", hour: "2-digit", minute: "2-digit"
+    }).formatToParts(new Date());
+    const get = t => parts.find(p => p.type === t).value;
+    return {
+      day: ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(get("weekday")),
+      mins: (+get("hour") % 24) * 60 + +get("minute")
+    };
+  }
+  const mins = hhmm => { const [h, m] = hhmm.split(":").map(Number); return h * 60 + m; };
+  const now = israelNow();
+
+  /* ---------- hours ---------- */
+  $("#hours").innerHTML = SITE.hours.map((h, i) => `
+    <li data-today="${i === now.day}">
+      <span class="day">יום ${DAYS[i]}</span>
+      ${h ? `<span dir="ltr">${h.open}-${h.close}</span>` : `<span class="shut">סגור</span>`}
+    </li>`).join("");
+
+  $("#foot-hours").innerHTML = SITE.hours.map((h, i) => `
+    <p class="row"><span>${DAYS[i].slice(0, 3)}׳</span><span dir="ltr">${h ? h.open + "-" + h.close : "סגור"}</span></p>`).join("");
+
+  /* ---------- open / closed ---------- */
+  (function () {
+    const chip = $("#status"), txt = $("#status-text"), today = SITE.hours[now.day];
+
+    if (today && now.mins >= mins(today.open) && now.mins < mins(today.close)) {
+      const left = mins(today.close) - now.mins;
+      chip.dataset.open = "true";
+      txt.textContent = left <= 60 ? `פתוח · נסגר בעוד ${left} דק׳` : `פתוח עכשיו · עד ${today.close}`;
+      return;
+    }
+    chip.dataset.open = "false";
+    if (today && now.mins < mins(today.open)) {
+      txt.textContent = `סגור · נפתח היום בשעה ${today.open}`;
+      return;
+    }
+    for (let s = 1; s <= 7; s++) {
+      const d = (now.day + s) % 7, h = SITE.hours[d];
+      if (h) {
+        txt.textContent = s === 1 ? `סגור · נפתח מחר בשעה ${h.open}` : `סגור · נפתח ביום ${DAYS[d]} בשעה ${h.open}`;
+        return;
+      }
+    }
+    txt.textContent = "סגור";
+  })();
+
+  /* ---------- misc ---------- */
+  $("#draft button").addEventListener("click", () => $("#draft").remove());
+  $("#year").textContent = new Date().getFullYear();
+
+  /* ---------- reveal ---------- */
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    $$(".reveal").forEach(el => el.classList.add("in"));
+  } else {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: .08 });
+    $$(".reveal").forEach((el, i) => { el.style.transitionDelay = (i % 4) * 70 + "ms"; io.observe(el); });
+  }
+})();
+</script>
+
+</body>
+</html>

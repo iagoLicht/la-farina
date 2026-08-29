@@ -1,0 +1,7 @@
+# Windows / OneDrive
+Thumbs.db
+desktop.ini
+*.tmp
+
+# generated preview, rebuilt by tools/build-preview.ps1
+lafarina-preview.html
