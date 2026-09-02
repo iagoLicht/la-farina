@@ -48,7 +48,9 @@ the browser, done.
 Three fields behave as switches. Leave them empty and the thing simply does not
 appear, so the site never shows a dead link or a bracketed placeholder:
 
-* `social.instagram` and `social.facebook`, an empty string hides that icon
+* `social.instagram`, `social.tiktok` and `social.facebook`, an empty string
+  hides that icon. Instagram drives two icons, one in the header and one in the
+  footer. TikTok and Facebook are footer only.
 * `kosher`, `null` hides the kosher line entirely
 
 In the menu, a category can carry `feature: true`, which sets it in larger type
@@ -75,9 +77,8 @@ periods or parentheses instead. Time ranges use a plain hyphen, for example
 
 ## Still to add
 
-* Phone number, currently the placeholder `050-000-0000`. Until it is real, the
-  call and WhatsApp buttons all dial a number that is not yours.
-* Instagram and Facebook links, currently empty so the icons are hidden
+* Facebook link, currently empty so that icon stays hidden. Instagram
+  (`lafarina_foodtruck_leader`) and TikTok (`@lafarinafoodtruckleader`) are live.
 * Kosher certification authority, currently `null` so no kosher line shows
 * Saturday hours, confirm whether closed
 * Confirm the four "good to know" facts: parking, seating, payment, pre-ordering
@@ -87,24 +88,74 @@ periods or parentheses instead. Time ranges use a plain hyphen, for example
 
 ## Photographs that must be replaced
 
-Every photograph on the site right now is a temporary stand-in from a free stock
-library, chosen to hold the right shape and mood. None of them is La Farina.
-Twelve photographs, all inside `SITE.images`:
+Nine photographs, all inside `SITE.images`. Two are real, the shakshuka in the
+middle of the strip and the bowl in the closing band. The other seven are
+temporary stand-ins from a free stock library, chosen to hold the right shape
+and mood.
+
+No photograph of the truck itself is on the page right now.
+`assets/photos/02-cart/truck-front.jpg` is cropped and ready if you want one.
 
 | Slot | Shape | What to shoot |
 |---|---|---|
 | `hero` | wide, dark | The truck at dusk with the lights on, or a hero pastry shot. Needs a dark, quiet area on one side for the wordmark to sit over. |
-| `about` | portrait | Coffee being poured, hands in frame |
-| `strip` (3) | 4:3 each | Croissants, the truck itself, a sandwich. These three sit butted together above the menu, exactly like the printed menu sheet. |
-| `boardRail` (2) | 4:5 each | A shake and a pastry, both against a dark ground. The second one is hidden on phones. |
+| `strip` (3) | 3:2, 4:3 on narrow | Croissants, shakshuka, a sandwich. These three sit butted together above the menu, exactly like the printed menu sheet. The shakshuka is done. |
 | `events` | wide | The truck set up at an event, people around it |
-| `film` (4) | 4:5 each | Cold coffee, pizza, bread, sandwiches. Full width band above the footer. |
+| `film` (4) | 4:5, 3:2 on narrow | Cold coffee, a bowl, bread, sandwiches. Full width band above the footer. The bowl is done. |
 
-Two notes on the current stand-ins. The truck in the middle of the strip is
-somebody else's truck and carries Japanese signage, so it is cropped to hide
-most of it. Replace that one first. All the photos also run through one shared
+One note on the stand-ins. All the photos run through one shared
 warm grade in CSS (`.ph img`), which is what makes a dozen different sources
 read as a single set. Your own photos will pick that up automatically.
+
+## The live preview link
+
+The site is already live as a private link you can open on a phone:
+
+```
+https://claude.ai/code/artifact/12ac7ac1-d31e-439a-b213-3d8c0a88e3a6
+```
+
+That page is built from `site/index.html`, it is not the same file. The viewer
+supplies its own page shell, blocks iframes and blocks images from any outside
+host, so `tools/build-artifact.py` rewrites four things and nothing else:
+
+1. keeps the part from `<title>` to `</body>` and re-adds the favicon and the
+   right to left direction
+2. swaps the Google Maps iframe for a Leaflet map whose OpenStreetMap tiles are
+   baked into the file, four zoom levels of them
+3. inlines all nine photographs into the file itself
+4. drops `srcset`, which an inlined photo makes pointless
+
+The map is the one place where the preview link and the real site genuinely
+differ. On a real host the Google Maps iframe is the better map and stays. In
+the preview nothing may load from outside, so the tiles around the truck are
+fetched once at build time and travel inside the page. Zoom runs from 15 to 18
+and the map can be dragged about 400 metres each way, which is where the tiles
+stop. That is what makes the preview file about 4 MB.
+
+The pin sits at `coords` in the config block, next to the address. It was
+geocoded from the address, so if it is not exactly on the truck, move it:
+
+```
+coords:    { lat: 32.0563087, lon: 34.8759125 },
+```
+
+then rebuild. Tiles for the new spot are fetched automatically.
+
+To push a change up:
+
+```
+py tools/build-artifact.py
+```
+
+then publish `build/artifact.html` to that same link. Downloads and re-encoded
+photos are cached in `build/.cache`, so a rebuild needs no internet and only a
+photo you actually changed is processed again. `build/` is not committed.
+
+One thing to know when you check the link on a phone. The phone button and the
+Instagram icon in the top bar only appear from 900 pixels wide and up. On a
+narrow screen the top bar deliberately carries the wordmark alone, and the ways
+to call are the buttons in the opening screen and in the footer.
 
 ## Publishing it later
 

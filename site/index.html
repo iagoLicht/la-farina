@@ -270,9 +270,26 @@ a.ph:hover img{transform:scale(1.04)}
 }
 .hdr-tel:hover{background:var(--espresso)}
 .hdr-tel span{direction:ltr}
+/* one of the nav items, drawn as a mark: same colour, same ember rule on hover */
+.hdr-ig{
+  display:none; place-items:center; flex:none; position:relative;
+  color:var(--ink-2); padding-block:.45rem; transition:color .2s ease;
+  /* the mark is shorter than a line of nav text, so match the line box and the
+     two ember rules land on exactly the same baseline */
+  min-height:calc(var(--t-small) * 1.62);
+}
+.hdr-ig::after{
+  content:""; position:absolute; inset-inline:0; bottom:.1rem; height:2px;
+  background:var(--ember); transform:scaleX(0); transform-origin:inline-end;
+  transition:transform .24s ease;
+}
+.hdr-ig:hover{color:var(--ink)}
+.hdr-ig:hover::after{transform:scaleX(1)}
+.hdr-ig:focus-visible{outline:2px solid var(--ember-deep); outline-offset:2px}
 @media (min-width:900px){
   .mainnav{display:flex}
   .hdr-tel{display:inline-flex}
+  .hdr-ig{display:inline-grid}
 }
 @media (max-width:899px){ .brand{margin-inline-end:auto} }
 
@@ -367,11 +384,9 @@ a.ph:hover img{transform:scale(1.04)}
 }
 .board-head{margin-bottom:2.25rem}
 .board-head .fine{margin-top:.6rem}
-.board-layout{display:grid; gap:clamp(2rem,4vw,3rem); grid-template-columns:1fr}
 /* 3 up only from 1180. Below that the columns fall under ~230px, where item
    names wrap and the dotted leaders collapse to their 1rem floor, so 2 wide
    columns beat 3 narrow ones. */
-@media (min-width:1180px){ .board-layout{grid-template-columns:minmax(0,1fr) 14.5rem} }
 .board{columns:1; column-gap:clamp(1.75rem,4vw,3rem)}
 @media (min-width:620px){ .board{columns:2} }
 @media (min-width:1180px){ .board{columns:3} }
@@ -402,21 +417,6 @@ a.ph:hover img{transform:scale(1.04)}
 /* the two things the truck is actually for get more room and more weight */
 .cat--feature .item-name{font-size:1.02rem}
 .cat--feature .item{padding-block:.62rem}
-.board-rail{display:grid; gap:1.25rem; align-content:start}
-.board-rail .ph{aspect-ratio:4/5}
-@media (min-width:1180px){
-  /* the board is much taller than the rail, so the rail travels with you */
-  .board-rail{position:sticky; top:calc(var(--hdr) + 2rem); align-self:start}
-}
-@media (max-width:1179px){
-  .board-rail{grid-template-columns:1fr 1fr; align-items:center}
-  .board-rail .ph{aspect-ratio:1}
-}
-/* one photo is enough on a phone; two would just extend the menu's tail */
-@media (max-width:520px){
-  .board-rail{grid-template-columns:1fr}
-  .board-rail .ph:nth-child(2){display:none}
-}
 
 /* ==========================================================================
    visit
@@ -587,6 +587,9 @@ a.ph:hover img{transform:scale(1.04)}
       <a href="#visit">שעות ומיקום</a>
       <a href="#events">אירועים</a>
     </nav>
+    <a class="hdr-ig" id="hdr-ig" href="#" target="_blank" rel="noopener" aria-label="אינסטגרם">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="17.2" cy="6.8" r="1.1"/></svg>
+    </a>
     <a class="hdr-tel" id="hdr-tel" href="#">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.4 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
       <span id="hdr-tel-text">התקשרו</span>
@@ -620,7 +623,7 @@ a.ph:hover img{transform:scale(1.04)}
   <div class="wrap">
     <div class="rail-cell">
       <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.2 2"/></svg>
-      <div><b id="rail-hours">שעות פתיחה</b><span id="rail-hours-sub">כל ימות השבוע</span></div>
+      <div><b id="rail-hours">שעות פתיחה</b></div>
     </div>
     <div class="rail-cell">
       <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -628,7 +631,7 @@ a.ph:hover img{transform:scale(1.04)}
     </div>
     <div class="rail-cell">
       <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h13a3 3 0 0 0 3-3v-1M4 20V6a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v10h2a2 2 0 0 1 2 2"/><path d="M7 8h6M7 12h6"/></svg>
-      <div><b>אספרסו ₪8, כריך ₪35</b><span>הכול נעשה במקום, בהזמנה</span></div>
+      <div><b>הכול נעשה במקום, בהזמנה</b></div>
     </div>
   </div>
 </div>
@@ -641,10 +644,7 @@ a.ph:hover img{transform:scale(1.04)}
       <h2 class="h1">מה יש אצלנו</h2>
       <p class="fine">המחירים בשקלים, כולל מע״מ</p>
     </div>
-    <div class="board-layout">
-      <div class="board" id="board"></div>
-      <aside class="board-rail rise" id="board-rail"></aside>
-    </div>
+    <div class="board" id="board"></div>
   </div>
   <div class="strip" id="strip"></div>
 </section>
@@ -686,8 +686,8 @@ a.ph:hover img{transform:scale(1.04)}
       <p class="eyebrow">אירועים פרטיים</p>
       <h2 class="h1">מביאים את הטראק אליכם</h2>
       <p class="lede">
-        ימי הולדת, אירועי חברה, ברית, כנס בוקר או יום צילומים. הטראק מגיע אליכם עם בר קפה מלא,
-        מאפים טריים וכריכים במקום. אתם רק אומרים איפה ומתי.
+        ימי הולדת, אירועי חברה, בריתות, כנסי בוקר וימי צילום. במקום תמצאו מגוון מתחמים
+        ובמה לקיום אירועים, לצד בר קפה מלא, מאפים טריים וכריכים שמוכנים במקום.
       </p>
       <div class="actions">
         <a class="btn btn--cream" id="wa-event" href="#" target="_blank" rel="noopener">
@@ -770,13 +770,16 @@ const SITE = {
 
   /* --- רשתות חברתיות. שורה ריקה = האייקון פשוט לא מופיע --------------- */
   social: {
-    instagram: "",   // [להשלמה] למשל https://instagram.com/lafarina
+    instagram: "https://instagram.com/lafarina_foodtruck_leader",
+    tiktok:    "https://www.tiktok.com/@lafarinafoodtruckleader",
     facebook:  ""    // [להשלמה]
   },
 
   /* --- מיקום --------------------------------------------------------- */
   address:   "מרכז לידר, גני תקווה",
   mapsQuery: "מרכז לידר גני תקווה",
+  /* הנעץ במפה. אם הוא לא בדיוק על הטראק, שנו כאן ובנו מחדש */
+  coords:    { lat: 32.0563087, lon: 34.8759125 },
 
   /* --- כשרות. null = השורה לא מופיעה באתר בכלל ------------------------ */
   kosher: null,      // [להשלמה] למשל "רבנות גני תקווה"
@@ -796,6 +799,7 @@ const SITE = {
      feature: true  = הקטגוריה מודגשת, אותיות גדולות יותר.
                       שמור את זה לקפה ולמאפים, מה שהטראק באמת עושה.
      flat           = שורת "הכול ב-" שמופיעה לצד שם הקטגוריה.
+     כל שינוי במחיר או בפריט מתעדכן כאן, במקום אחד.
      ------------------------------------------------------------------- */
   menu: [
     { name:"קפה", feature:true, items:[
@@ -886,24 +890,17 @@ const SITE = {
     /* שלוש התמונות שנצמדות זו לזו מעל התפריט, כמו בתפריט המודפס */
     strip: [
       { src:"https://images.pexels.com/photos/14565935/pexels-photo-14565935.jpeg?auto=compress&cs=tinysrgb&w=1000", alt:"קרואסונים על רשת עם אבקת סוכר נופלת" },
-      { src:"../assets/photos/02-cart/WhatsApp%20Image%202026-08-30%20at%2009.00.14.jpeg", alt:"הטראק של לה פארינה פתוח בצהריים, חלון השירות והישיבה בחוץ", pos:"50% 38%" },
+      { src:"../assets/photos/04-food/shakshuka.jpg", alt:"שקשוקה במחבת עם ביצים, כוסברה ובזיליקום" },
       { src:"https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=1000&q=75", alt:"כריך טוסט חתוך לשניים" }
     ],
 
-    /* הטור הצר לצד התפריט. במסך צר מוצגת רק הראשונה.
-       הערה למי שמעדכן: התפריט מבוסס על התפריט המודפס, וכל שינוי במחיר
-       או בפריט מתעדכן למעלה ב-menu, במקום אחד. */
-    boardRail: [
-      { src:"https://images.pexels.com/photos/14373648/pexels-photo-14373648.jpeg?auto=compress&cs=tinysrgb&w=700", alt:"שייק סמיך בכוס גבוהה" },
-      { src:"https://images.unsplash.com/photo-1530610476181-d83430b64dcd?auto=format&fit=crop&w=700&q=75", alt:"ערימת קרואסונים על הדלפק" }
-    ],
 
     events: { src:"https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1400&q=75", alt:"שלוש כוסות קפה מורמות יחד באירוע" },
 
     /* ארבע התמונות שסוגרות את העמוד */
     film: [
       { src:"https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=75", alt:"קפה קר בכוס גבוהה" },
-      { src:"https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=75", alt:"פיצה חתוכה על קרש עץ" },
+      { src:"../assets/photos/04-food/bowl-new.jpg", alt:"קערת פירות עם גרנולה, מנגו, תותים ופירות יער" },
       { src:"https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=75", alt:"כיכרות לחם כפרי טרי" },
       { src:"https://images.pexels.com/photos/24796900/pexels-photo-24796900.jpeg?auto=compress&cs=tinysrgb&w=800", alt:"כריכים טריים בויטרינה" }
     ]
@@ -958,8 +955,6 @@ const SITE = {
   $("#hero-img").innerHTML = img(SITE.images.hero, { eager: true, sizes: "100vw" });
   $("#strip").innerHTML = SITE.images.strip
     .map(o => frame(o, "", { sizes: "(min-width:760px) 33vw, 100vw" })).join("");
-  $("#board-rail").innerHTML = SITE.images.boardRail
-    .map(o => frame(o, "", { sizes: "(min-width:1180px) 15rem, 45vw" })).join("");
   $("#events-media").innerHTML = img(SITE.images.events, { sizes: "(min-width:900px) 50vw, 100vw" });
   $("#filmstrip").innerHTML = SITE.images.film
     .map(o => frame(o, "", { sizes: "(min-width:760px) 25vw, 50vw" })).join("");
@@ -1004,13 +999,18 @@ const SITE = {
   const SOCIAL_ICONS = {
     instagram: '<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="17.2" cy="6.8" r="1.1"/>',
     facebook:  '<path d="M14 9V7.2c0-.8.2-1.2 1.4-1.2H17V3h-2.6C11.5 3 10.5 4.5 10.5 7v2H8.5v3h2v9h3.5v-9h2.4l.3-3Z"/>',
+    tiktok:    '<g transform="translate(12 12) scale(.86) translate(-12 -12)"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07Z"/></g>',
     whatsapp:  '<path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.3.1-.5.2-.7l.4-.5c.1-.2.1-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3c-.3.3-.9.9-.9 2.1s.9 2.5 1.1 2.6a9.6 9.6 0 0 0 4 3.5c1.6.6 1.9.5 2.3.5.4 0 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1Z"/>'
   };
   const socialLinks = [
     { k:"instagram", href:SITE.social.instagram, label:"אינסטגרם" },
+    { k:"tiktok",    href:SITE.social.tiktok,    label:"טיקטוק" },
     { k:"facebook",  href:SITE.social.facebook,  label:"פייסבוק" },
     { k:"whatsapp",  href:wa,                    label:"וואטסאפ" }
   ].filter(s => s.href);
+  if (SITE.social.instagram) link("hdr-ig", SITE.social.instagram);
+  else $("#hdr-ig")?.remove();
+
   $("#social").innerHTML = socialLinks.map(s => `
     <a href="${esc(s.href)}" target="_blank" rel="noopener" aria-label="${esc(s.label)}">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${SOCIAL_ICONS[s.k]}</svg>
@@ -1043,7 +1043,6 @@ const SITE = {
 
   const today = SITE.hours[now.day];
   $("#rail-hours").textContent = today ? `היום ${today.open} עד ${today.close}` : "היום סגור";
-  $("#rail-hours-sub").textContent = "ראשון עד חמישי 07:30, שישי 07:00";
 
   /* ---------- open or closed ---------- */
   (function () {
