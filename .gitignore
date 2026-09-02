@@ -5,3 +5,6 @@ desktop.ini
 
 # generated preview, rebuilt by tools/build-preview.ps1
 lafarina-preview.html
+
+# generated artifact build and its photo cache, rebuilt by tools/build-artifact.py
+build/
