@@ -88,19 +88,19 @@ periods or parentheses instead. Time ranges use a plain hyphen, for example
 
 ## Photographs that must be replaced
 
-Nine photographs, all inside `SITE.images`. Two are real, the shakshuka in the
-middle of the strip and the bowl in the closing band. The other seven are
-temporary stand-ins from a free stock library, chosen to hold the right shape
-and mood.
+Nine photographs, all inside `SITE.images`. Three are real: the truck in the
+events band, the shakshuka in the middle of the strip, and the bowl in the
+closing band. The other six are temporary stand-ins from a free stock library,
+chosen to hold the right shape and mood.
 
-No photograph of the truck itself is on the page right now.
-`assets/photos/02-cart/truck-front.jpg` is cropped and ready if you want one.
+`assets/photos/02-cart/truck-front.jpg` is a second truck shot, cropped to 3:2
+and unused. It is the same truck with nobody in it.
 
 | Slot | Shape | What to shoot |
 |---|---|---|
 | `hero` | wide, dark | The truck at dusk with the lights on, or a hero pastry shot. Needs a dark, quiet area on one side for the wordmark to sit over. |
 | `strip` (3) | 3:2, 4:3 on narrow | Croissants, shakshuka, a sandwich. These three sit butted together above the menu, exactly like the printed menu sheet. The shakshuka is done. |
-| `events` | wide | The truck set up at an event, people around it |
+| `events` | wide, bleeds off the edge | Done. The truck with customers at the counter. Fills half the page from 900px and stretches to the copy, so a wide shot suits it and a portrait one does not. |
 | `film` (4) | 4:5, 3:2 on narrow | Cold coffee, a bowl, bread, sandwiches. Full width band above the footer. The bowl is done. |
 
 One note on the stand-ins. All the photos run through one shared
