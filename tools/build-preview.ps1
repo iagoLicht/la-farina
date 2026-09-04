@@ -1,6 +1,6 @@
 # Builds a preview copy of the site for publishing as a Claude Artifact.
 #
-# site/index.html is the real, deployable website. The Artifact viewer supplies
+# index.html is the real, deployable website. The Artifact viewer supplies
 # its own <!doctype>/<html>/<head>/<body> skeleton, so this script strips ours
 # out and writes the remainder to a temp file.
 #
@@ -8,7 +8,7 @@
 
 param([string]$Out = (Join-Path $env:TEMP "lafarina-preview.html"))
 
-$src = Join-Path $PSScriptRoot "..\site\index.html"
+$src = Join-Path $PSScriptRoot "..\index.html"
 if (-not (Test-Path $src)) { throw "cannot find $src" }
 
 $t = [IO.File]::ReadAllText($src)

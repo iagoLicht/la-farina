@@ -6,8 +6,7 @@ Everything for the website lives in this folder.
 
 ```
 La-farina/
-  site/
-    index.html        The entire website. One self contained file.
+  index.html          The entire website. One self contained file.
   assets/
     logo/             Brand logo files
     manu/             Photo of the printed menu
@@ -26,14 +25,14 @@ La-farina/
 
 ## The website itself
 
-`site/index.html` is the whole thing. No database, no build step, no dependencies.
+`index.html` is the whole thing. No database, no build step, no dependencies.
 Open it by double clicking and it runs in your browser. The logo is embedded
 directly inside the file, so it works even with no internet connection except
 for the fonts.
 
 ## Changing prices, hours, photos or the phone number
 
-Open `site/index.html` in any text editor and search for this line:
+Open `index.html` in any text editor and search for this line:
 
 ```
 const SITE = {
@@ -61,7 +60,7 @@ is actually for.
 
 Every image on the page is one line in `SITE.images`. To swap one in:
 
-1. Replace `src` with a local path, for example `../assets/photos/01-hero/truck.jpg`
+1. Replace `src` with a local path, for example `assets/photos/01-hero/truck.jpg`
 2. Delete the `srcset` line if that image has one
 3. Update `alt` to describe the new photo in Hebrew
 4. Optionally add `pos: "70% 40%"` to choose which part of the photo stays in frame
@@ -115,7 +114,7 @@ The site is already live as a private link you can open on a phone:
 https://claude.ai/code/artifact/12ac7ac1-d31e-439a-b213-3d8c0a88e3a6
 ```
 
-That page is built from `site/index.html`, it is not the same file. The viewer
+That page is built from `index.html`, it is not the same file. The viewer
 supplies its own page shell, blocks iframes and blocks images from any outside
 host, so `tools/build-artifact.py` rewrites four things and nothing else:
 
@@ -157,13 +156,30 @@ Instagram icon in the top bar only appear from 900 pixels wide and up. On a
 narrow screen the top bar deliberately carries the wordmark alone, and the ways
 to call are the buttons in the opening screen and in the footer.
 
-## Publishing it later
+## Publishing
 
-The site is static, so it can be hosted free on Netlify, Cloudflare Pages,
-Vercel or GitHub Pages. Drag the `site` folder onto their upload page and it is
-live. The only recurring cost is the domain name, roughly 10 to 40 dollars a
-year depending on whether you choose `.com` or `.co.il`.
+The site is published with GitHub Pages, free, straight out of this repository.
+`index.html` sits at the top of the repo and `assets/` sits beside it, which is
+exactly the shape GitHub Pages serves, so there is no build step and nothing to
+upload. Push to `main` and the live site updates itself within about a minute.
 
-Before going live, replace `example.com` in the `og:image` and `og:url` tags at
-the top of `index.html` with the real domain, so the correct photo appears when
-someone shares the link on WhatsApp.
+Turn it on once, under Settings, Pages, in the GitHub repository:
+
+* Source: Deploy from a branch
+* Branch: `main`, folder: `/ (root)`
+
+The address is then `https://iagolicht.github.io/la-farina/`.
+
+This is why the page must stay at the top of the repository. If it moved back
+into a `site/` folder, that folder would become the root of the website and
+every `assets/...` photograph would sit outside it and fail to load.
+
+### Adding a real domain later
+
+Buy the domain anywhere, then Settings, Pages, Custom domain, and follow the
+DNS records GitHub gives you. HTTPS is issued automatically. Nothing about the
+repository changes.
+
+At that point, and only then, replace `example.com` in the `og:image` and
+`og:url` tags at the top of `index.html` with the real address, so the correct
+photo appears when someone shares the link on WhatsApp.

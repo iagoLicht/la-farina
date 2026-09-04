@@ -1,6 +1,6 @@
-"""Turns site/index.html into the file that gets published as the live link.
+"""Turns index.html into the file that gets published as the live link.
 
-site/index.html is the real, deployable website and stays the single source of
+index.html is the real, deployable website and stays the single source of
 truth. The Claude Artifact viewer is a stricter place than a normal web host:
 it supplies its own <!doctype>/<html>/<head>/<body>, it blocks iframes, and it
 blocks images loaded from any outside host. So this script rewrites four things
@@ -33,7 +33,7 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / "site" / "index.html"
+SRC = ROOT / "index.html"
 OUT = ROOT / "build" / "artifact.html"
 CACHE = ROOT / "build" / ".cache"
 
@@ -316,7 +316,7 @@ def build():
 
     icon = re.search(r'<link rel="icon" href="[^"]+">', src)
     if not icon:
-        raise SystemExit('site/index.html has no <link rel="icon">')
+        raise SystemExit('index.html has no <link rel="icon">')
 
     head = src[src.index("<title>"): src.index("</head>")].rstrip()
     body = src[src.index("<body>") + len("<body>"): src.rindex("</body>")]
@@ -332,7 +332,7 @@ def build():
         r'coords:\s*\{\s*lat:\s*(-?[\d.]+),\s*lon:\s*(-?[\d.]+)\s*\}', src
     )
     if not coords:
-        raise SystemExit("SITE.coords is missing from site/index.html")
+        raise SystemExit("SITE.coords is missing from index.html")
     lat, lon = float(coords.group(1)), float(coords.group(2))
 
     anchor = ".map iframe{"
@@ -345,7 +345,7 @@ def build():
 
     old_map = re.search(r'^ *<div class="map"><iframe .*?</iframe></div>$', body, re.M)
     if not old_map:
-        raise SystemExit("the map markup in site/index.html changed shape")
+        raise SystemExit("the map markup in index.html changed shape")
     body = body[:old_map.start()] + MAP_MARKUP + body[old_map.end():]
 
     old_js = re.search(
@@ -355,7 +355,7 @@ def build():
         re.S,
     )
     if not old_js:
-        raise SystemExit("the map wiring in site/index.html changed shape")
+        raise SystemExit("the map wiring in index.html changed shape")
     body = (body[:old_js.start()] + '  $("#map-link").href = gmaps;\n'
             + body[old_js.end():])
     body = body.rstrip() + "\n\n" + map_script(lat, lon)
