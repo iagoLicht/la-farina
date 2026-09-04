@@ -230,6 +230,12 @@ ul{list-style:none; margin:0; padding:0}
   width:100%; height:100%; object-fit:cover;
   object-position:var(--pos, 50% 50%);
 }
+/* A phone crops a photograph far harder than a wide screen does, because the
+   tiles change shape at 620. --pos-m lets a single photograph be re-framed for
+   the narrow layout without touching how it sits on a desktop. */
+@media (max-width:619px){
+  .ph img{object-position:var(--pos-m, var(--pos, 50% 50%))}
+}
 /* Deliberately no hover on the figures. None of them is a link, so moving them
    under the cursor promises a click that never happens, and on the phones most
    of this site's traffic uses it never fires at all. Kept for the day an image
@@ -374,13 +380,17 @@ a.ph:hover img{transform:scale(1.04)}
 .board-band{background:var(--paper-2); border-block:1px solid var(--rule)}
 /* three photographs butted hard against each other, as on the printed sheet */
 .strip{display:grid; grid-template-columns:1fr 1fr; gap:0}
+/* 3:2 beside a 3:4, because the toast is a 3:2 photograph and this is the only
+   pairing that leaves it completely uncropped. The croissant tile loses 11% of
+   its height instead, which costs nothing: that band is the hand at the top and
+   the paper at the bottom, not the pastry. */
 .strip .ph{aspect-ratio:3/2}
-.strip .ph:first-child{grid-column:1 / -1; aspect-ratio:12/5}
+.strip .ph:first-child{grid-row:span 2; aspect-ratio:3/4}
 /* reflows at 620 with the menu board rather than at 760, so the two photo bands
    stop eating a fifth of the page between 620 and 760 */
 @media (min-width:620px){
   .strip{grid-template-columns:repeat(3,1fr)}
-  .strip .ph, .strip .ph:first-child{grid-column:auto; aspect-ratio:4/3}
+  .strip .ph, .strip .ph:first-child{grid-column:auto; grid-row:auto; aspect-ratio:4/3}
 }
 .board-head{margin-bottom:2.25rem}
 .board-head .fine{margin-top:.6rem}
@@ -462,8 +472,12 @@ a.ph:hover img{transform:scale(1.04)}
 /* pinned like every other image, so swapping in a portrait shot cannot move
    the section. No min-height here: it would fight the ratio and force the
    width past the viewport on a 360px phone. */
-.events-media{aspect-ratio:3/2}
+/* The lawn starts 93% of the way down the photograph. 48:25 is the widest the
+   frame can be while still cutting all of it off, and going any wider than that
+   starts taking the customers' feet with it. Anchored to the top, below. */
+.events-media{aspect-ratio:48/25}
 .events-media img{width:100%; height:100%; object-fit:cover}
+@media (max-width:899px){ .events-media img{object-position:50% 0} }
 .events-band .lede{color:#CDBCA2}
 @media (min-width:900px){
   .events{grid-template-columns:1fr 1fr}
@@ -480,11 +494,25 @@ a.ph:hover img{transform:scale(1.04)}
    the closing band. four photographs, no gaps, no words.
    ========================================================================== */
 .filmstrip{display:grid; grid-template-columns:1fr 1fr; gap:0}
-.filmstrip .ph{aspect-ratio:3/2}
-@media (min-width:620px){
-  .filmstrip{grid-template-columns:repeat(4,1fr)}
-  .filmstrip .ph{aspect-ratio:4/5}
+.filmstrip .ph{aspect-ratio:4/5}
+/* Two of these four are landscape (coffee, bread) and two are portrait (bowl,
+   sandwiches), so one tile shape always had to crop half of them hard. On a
+   phone each row takes the shape of the pair inside it instead: order pulls the
+   two landscapes into the top row and the two portraits into the bottom one, so
+   the rows can differ while the two tiles in each row stay identical. Nothing
+   is scaled up to fill a shape it does not have. */
+@media (max-width:619px){
+  .filmstrip .ph:nth-child(1), .filmstrip .ph:nth-child(3){aspect-ratio:3/2}
+  .filmstrip .ph:nth-child(2), .filmstrip .ph:nth-child(4){aspect-ratio:3/4}
+  /* all four need an order, not just the two that move: an item left at the
+     default 0 sorts ahead of every item that has one, which pairs the wrong
+     two photographs and leaves a hole under the shorter of them. */
+  .filmstrip .ph:nth-child(1){order:1}
+  .filmstrip .ph:nth-child(3){order:2}
+  .filmstrip .ph:nth-child(2){order:3}
+  .filmstrip .ph:nth-child(4){order:4}
 }
+@media (min-width:620px){ .filmstrip{grid-template-columns:repeat(4,1fr)} }
 
 /* ==========================================================================
    footer
@@ -889,7 +917,8 @@ const SITE = {
 
     /* שלוש התמונות שנצמדות זו לזו מעל התפריט, כמו בתפריט המודפס */
     strip: [
-      { src:"https://images.pexels.com/photos/14565935/pexels-photo-14565935.jpeg?auto=compress&cs=tinysrgb&w=1000", alt:"קרואסונים על רשת עם אבקת סוכר נופלת" },
+      { src:"https://images.pexels.com/photos/14565935/pexels-photo-14565935.jpeg?auto=compress&cs=tinysrgb&w=1000",
+        alt:"קרואסונים על רשת עם אבקת סוכר נופלת" },
       { src:"../assets/photos/04-food/shakshuka.jpg", alt:"שקשוקה במחבת עם ביצים, כוסברה ובזיליקום" },
       { src:"https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=1000&q=75", alt:"כריך טוסט חתוך לשניים" }
     ],
@@ -902,7 +931,10 @@ const SITE = {
       { src:"https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=75", alt:"קפה קר בכוס גבוהה" },
       { src:"../assets/photos/04-food/bowl-new.jpg", alt:"קערת פירות עם גרנולה, מנגו, תותים ופירות יער" },
       { src:"https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=75", alt:"כיכרות לחם כפרי טרי" },
-      { src:"https://images.pexels.com/photos/24796900/pexels-photo-24796900.jpeg?auto=compress&cs=tinysrgb&w=800", alt:"כריכים טריים בויטרינה" }
+      { src:"https://images.pexels.com/photos/24796900/pexels-photo-24796900.jpeg?auto=compress&cs=tinysrgb&w=800",
+        /* בטלפון האריח ריבועי: מורידים את החיתוך אל הכריכים ומוותרים על תאורת התקרה */
+        posM:"50% 62%",
+        alt:"כריכים טריים בויטרינה" }
     ]
   }
 };
@@ -922,8 +954,15 @@ const SITE = {
       + ` alt="${esc(o.alt || "")}" loading="${eager ? "eager" : "lazy"}"`
       + ` decoding="${eager ? "sync" : "async"}"${eager ? ' fetchpriority="high"' : ""}>`
     : "";
-  const frame = (o, cls = "", opts) =>
-    `<figure class="ph ${cls}"${o && o.pos ? ` style="--pos:${esc(o.pos)}"` : ""}>${img(o, opts)}</figure>`;
+  /* pos frames the photograph everywhere, posM only on a phone. Either may be
+     left out, in which case the picture simply sits in the middle of its tile. */
+  const frame = (o, cls = "", opts) => {
+    const vars = [
+      o && o.pos  ? `--pos:${esc(o.pos)}`    : "",
+      o && o.posM ? `--pos-m:${esc(o.posM)}` : ""
+    ].filter(Boolean).join(";");
+    return `<figure class="ph ${cls}"${vars ? ` style="${vars}"` : ""}>${img(o, opts)}</figure>`;
+  };
 
   /* ---------- links ---------- */
   const digits = SITE.phoneIntl.replace(/\D/g, "");
