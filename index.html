@@ -268,7 +268,7 @@ a.ph:hover img{transform:scale(1.04)}
 .brand .caps{font-size:.5rem; letter-spacing:.28em; color:var(--ink-3)}
 /* the truck closes the lockup. Its viewBox stops just under the wheels, so
    baseline alignment stands it on the wordmark's own baseline. */
-.brand .truck{flex:none; width:auto; height:1.05em; color:var(--ember-deep)}
+.brand .truck{flex:none; width:auto; height:1.05em; color:var(--ink)}
 .mainnav{display:flex; gap:1.75rem; margin-inline-start:auto; font-size:var(--t-small); font-weight:600}
 .mainnav a{text-decoration:none; color:var(--ink-2); position:relative; padding-block:.45rem}
 .mainnav a::after{
@@ -439,6 +439,8 @@ a.ph:hover img{transform:scale(1.04)}
 .item-main{flex:0 1 auto; min-width:0}
 .item-name{display:block; font-weight:600; line-height:1.35; font-size:var(--t-small)}
 .item-desc{display:block; font-size:var(--t-fine); color:var(--ink-3); line-height:1.45; margin-top:.05rem}
+/* a d2 line is a list of its own, so it needs more air than a wrapped line */
+.item-desc + .item-desc{margin-top:.22rem}
 .leader{
   flex:1 1 auto; min-width:1rem; align-self:center;
   border-bottom:1.5px dotted var(--rule); transform:translateY(-.1rem);
@@ -900,7 +902,7 @@ const SITE = {
       { n:"כריך סביח", p:35 }
     ]},
     { name:"טוסטים", items:[
-      { n:"טוסט קלאסי", d:"גבינת מוצרלה ותוספות לבחירתכם: עגבניה, זיתים ירוקים, פטריות, ביצה קשה, בולגרית. ממרחים: שמנת, פסטו, מיונז, אריסה", p:30 },
+      { n:"טוסט קלאסי", d:"גבינת מוצרלה ותוספות לבחירתכם: עגבניה, זיתים ירוקים, פטריות, ביצה קשה, בולגרית", d2:"ממרחים: שמנת, פסטו, מיונז, אריסה", p:30 },
       { n:"טוסט צ'דר", d:"גבינת צ'דר, מיונז אריסה, ביצה קשה, עגבניה, קלמטה", p:30 }
     ]},
     { name:"סלטים", items:[
@@ -1055,10 +1057,11 @@ const SITE = {
       </div>
       <ul>
         ${cat.items.map(i => `
-          <li class="item${i.d ? " item--desc" : ""}">
+          <li class="item${i.d || i.d2 ? " item--desc" : ""}">
             <span class="item-main">
               <span class="item-name">${i.ltr ? `<bdi dir="ltr">${esc(i.n)}</bdi>` : esc(i.n)}</span>
               ${i.d ? `<span class="item-desc">${esc(i.d)}</span>` : ""}
+              ${i.d2 ? `<span class="item-desc">${esc(i.d2)}</span>` : ""}
             </span>
             <span class="leader" aria-hidden="true"></span>
             <span class="price" dir="ltr">₪${i.p}</span>
