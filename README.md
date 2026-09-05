@@ -111,7 +111,7 @@ read as a single set. Your own photos will pick that up automatically.
 The site is already live as a private link you can open on a phone:
 
 ```
-https://claude.ai/code/artifact/12ac7ac1-d31e-439a-b213-3d8c0a88e3a6
+https://claude.ai/code/artifact/d889e698-253f-4c37-bcf4-377bad60b78b
 ```
 
 That page is built from `index.html`, it is not the same file. The viewer
@@ -151,10 +151,13 @@ then publish `build/artifact.html` to that same link. Downloads and re-encoded
 photos are cached in `build/.cache`, so a rebuild needs no internet and only a
 photo you actually changed is processed again. `build/` is not committed.
 
-One thing to know when you check the link on a phone. The phone button and the
-Instagram icon in the top bar only appear from 900 pixels wide and up. On a
-narrow screen the top bar deliberately carries the wordmark alone, and the ways
-to call are the buttons in the opening screen and in the footer.
+One thing to know when you check the link on a phone. The top bar carries the
+same five things at every width: the wordmark with its truck, the three
+sections, Instagram and the phone. Below 900 pixels they will not sit on one
+line, so the bar splits in two. The wordmark, Instagram and the phone take the
+first row, the three sections take the second under a hairline, and the phone
+button drops to its icon because the number is already in the fixed bar at the
+bottom of the screen.
 
 ## Publishing
 
