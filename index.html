@@ -99,7 +99,12 @@
   --wrap:74rem;
   --pad:clamp(1.15rem, 4.5vw, 2.5rem);
   --band:clamp(3.75rem, 8.5vw, 6.75rem);
-  --hdr:58px;
+  /* the phone header runs on two rows: the lockup, Instagram and the phone on
+     the first, the three sections on the second. A desktop puts all five
+     things on one line, so there --hdr is simply overwritten below. */
+  --hdr-1:46px;
+  --hdr-2:38px;
+  --hdr:calc(var(--hdr-1) + var(--hdr-2));
 
   --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
 }
@@ -253,14 +258,18 @@ a.ph:hover img{transform:scale(1.04)}
 }
 .hdr[data-stuck="true"]{border-bottom-color:var(--rule)}
 .hdr .wrap{display:flex; align-items:center; gap:1rem; height:var(--hdr)}
-/* both halves of the lockup are Latin, so the lockup itself reads left to right */
 .brand{
-  display:flex; direction:ltr; align-items:baseline; gap:.55rem;
+  display:flex; align-items:center;
   text-decoration:none; flex:none; padding-block:.7rem;   /* clears 44px tap target */
 }
+/* every part of the lockup is Latin, so the lockup itself reads left to right */
+.lockup{display:flex; direction:ltr; align-items:baseline; gap:.55rem}
 .brand .mark{font-size:1.45rem}
 .brand .caps{font-size:.5rem; letter-spacing:.28em; color:var(--ink-3)}
-.mainnav{display:none; gap:1.75rem; margin-inline-start:auto; font-size:var(--t-small); font-weight:600}
+/* the truck closes the lockup. Its viewBox stops just under the wheels, so
+   baseline alignment stands it on the wordmark's own baseline. */
+.brand .truck{flex:none; width:auto; height:1.05em; color:var(--ember-deep)}
+.mainnav{display:flex; gap:1.75rem; margin-inline-start:auto; font-size:var(--t-small); font-weight:600}
 .mainnav a{text-decoration:none; color:var(--ink-2); position:relative; padding-block:.45rem}
 .mainnav a::after{
   content:""; position:absolute; inset-inline:0; bottom:.1rem; height:2px;
@@ -270,7 +279,7 @@ a.ph:hover img{transform:scale(1.04)}
 .mainnav a:hover{color:var(--ink)}
 .mainnav a:hover::after{transform:scaleX(1)}
 .hdr-tel{
-  display:none; align-items:center; gap:.45rem; flex:none; text-decoration:none;
+  display:inline-flex; align-items:center; gap:.45rem; flex:none; text-decoration:none;
   background:var(--ink); color:var(--cream); padding:.5rem 1.1rem; border-radius:1px;
   font-size:var(--t-small); font-weight:700;
 }
@@ -278,7 +287,7 @@ a.ph:hover img{transform:scale(1.04)}
 .hdr-tel span{direction:ltr}
 /* one of the nav items, drawn as a mark: same colour, same ember rule on hover */
 .hdr-ig{
-  display:none; place-items:center; flex:none; position:relative;
+  display:inline-grid; place-items:center; flex:none; position:relative;
   color:var(--ink-2); padding-block:.45rem; transition:color .2s ease;
   /* the mark is shorter than a line of nav text, so match the line box and the
      two ember rules land on exactly the same baseline */
@@ -292,12 +301,29 @@ a.ph:hover img{transform:scale(1.04)}
 .hdr-ig:hover{color:var(--ink)}
 .hdr-ig:hover::after{transform:scaleX(1)}
 .hdr-ig:focus-visible{outline:2px solid var(--ember-deep); outline-offset:2px}
-@media (min-width:900px){
-  .mainnav{display:flex}
-  .hdr-tel{display:inline-flex}
-  .hdr-ig{display:inline-grid}
+/* ---------- the phone header ----------------------------------------------
+   It carries the same five things as the desktop one. The lockup, Instagram
+   and the phone will not share a 375px line with three Hebrew section names,
+   so the sections take a row of their own under a hairline, and the phone
+   drops to its mark. Both rows are a declared height, which is what keeps
+   --hdr honest for the hero and for every section's scroll-margin. --------- */
+@media (max-width:899px){
+  .hdr .wrap{flex-wrap:wrap; column-gap:.85rem; row-gap:0}
+  .brand{margin-inline-end:auto; padding-block:0; height:var(--hdr-1)}
+  .hdr-ig{width:36px; min-height:36px}
+  .hdr-tel{width:38px; height:38px; padding:0; justify-content:center}
+  .hdr-tel span{display:none}
+  .mainnav{
+    order:1; flex-basis:100%; height:var(--hdr-2); margin:0; gap:0;
+    align-items:center; justify-content:space-between; position:relative;
+  }
+  /* the rule between the two rows runs to both edges, like the one the header
+     grows under the whole thing once you have scrolled */
+  .mainnav::before{
+    content:""; position:absolute; top:0; inset-inline:calc(var(--pad) * -1);
+    height:1px; background:var(--rule-soft);
+  }
 }
-@media (max-width:899px){ .brand{margin-inline-end:auto} }
 
 /* ==========================================================================
    hero
@@ -319,11 +345,11 @@ a.ph:hover img{transform:scale(1.04)}
   display:flex; flex-direction:column; justify-content:flex-end;
   padding-block:calc(var(--hdr) + 2rem) clamp(2.25rem, 5vw, 3.5rem);
 }
-/* The third term is what keeps the hero off the fixed action bar: 58px of
-   header plus the bar's own 74px. Padding cannot do this job, because on a
+/* The third term is what keeps the hero off the fixed action bar: the header
+   over it plus the bar's own 74px. Padding cannot do this job, because on a
    short phone it is the hero's own height that runs under the bar. */
 @media (max-width:899px){
-  .hero-inner{min-height:min(84svh, 660px, calc(100svh - 132px))}
+  .hero-inner{min-height:min(84svh, 660px, calc(100svh - var(--hdr) - 74px))}
 }
 .hero h1{font-size:var(--t-hero); font-weight:500; margin:0}
 .hero .mark{display:block; text-shadow:0 2px 40px rgba(0,0,0,.55)}
@@ -607,8 +633,17 @@ a.ph:hover img{transform:scale(1.04)}
 <header class="hdr" id="hdr">
   <div class="wrap">
     <a class="brand" href="#top" aria-label="La Farina Food Truck, לראש העמוד">
-      <span class="mark">La Farina</span>
-      <span class="caps">Food Truck</span>
+      <span class="lockup">
+        <span class="mark">La Farina</span>
+        <span class="caps">Food Truck</span>
+        <svg class="truck" viewBox="0 0 32 23" width="26" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M2.7 17.3V8.6a2 2 0 0 1 2-2h15.4v10.7"/>
+          <path d="M20.1 10.9h4.4l3.3 3.4v3H20.1"/>
+          <rect x="5.6" y="9.6" width="8.7" height="4.6" rx=".8"/>
+          <circle cx="8.4" cy="19.4" r="2.3"/>
+          <circle cx="23.2" cy="19.4" r="2.3"/>
+        </svg>
+      </span>
     </a>
     <nav class="mainnav" aria-label="ניווט ראשי">
       <a href="#menu">תפריט</a>
@@ -845,6 +880,7 @@ const SITE = {
       { n:"קרואסון נוטלה", p:19 },
       { n:"קרואסון פיסטוק", p:19 },
       { n:"דונאטס", p:12 },
+      { n:"מיני דונאטס", p:9 },
       { n:"קאפ קייק", p:18 },
       { n:"פרוסת עוגת שוקולד", p:19 }
     ]},
@@ -853,7 +889,9 @@ const SITE = {
       { n:"כריך טונה", p:35 },
       { n:"כריך אבוקדו", p:35 },
       { n:"כריך סלט ביצים", p:35 },
-      { n:"כריך סלמון", p:35 }
+      { n:"כריך סלמון", p:35 },
+      { n:"כריך חביתה", p:35 },
+      { n:"כריך סביח", p:35 }
     ]},
     { name:"סלטים", items:[
       { n:"סלט טונה", d:"עגבנייה, מלפפון, טונה, חסה, שמן זית, גבינה קשה", p:40 },
