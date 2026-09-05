@@ -530,19 +530,27 @@ a.ph:hover img{transform:scale(1.04)}
    phone each row takes the shape of the pair inside it instead: order pulls the
    two landscapes into the top row and the two portraits into the bottom one, so
    the rows can differ while the two tiles in each row stay identical. Nothing
-   is scaled up to fill a shape it does not have. */
+   is scaled up to fill a shape it does not have.
+   The shape and the order ride on a class rather than on nth-child, because on
+   a phone the two portraits leave this band for .pair and the two that stay
+   would otherwise re-number and take the wrong shape. Every tile carries an
+   order, or one left at the default 0 would sort ahead of the rest. */
 @media (max-width:619px){
-  .filmstrip .ph:nth-child(1), .filmstrip .ph:nth-child(3){aspect-ratio:3/2}
-  .filmstrip .ph:nth-child(2), .filmstrip .ph:nth-child(4){aspect-ratio:3/4}
-  /* all four need an order, not just the two that move: an item left at the
-     default 0 sorts ahead of every item that has one, which pairs the wrong
-     two photographs and leaves a hole under the shorter of them. */
-  .filmstrip .ph:nth-child(1){order:1}
-  .filmstrip .ph:nth-child(3){order:2}
-  .filmstrip .ph:nth-child(2){order:3}
-  .filmstrip .ph:nth-child(4){order:4}
+  .filmstrip .ph--wide{aspect-ratio:3/2; order:1}
+  .filmstrip .ph--tall{aspect-ratio:3/4; order:2}
 }
 @media (min-width:620px){ .filmstrip{grid-template-columns:repeat(4,1fr)} }
+
+/* ==========================================================================
+   the phone pair. The two portraits out of the closing band, brought up
+   between the opening and the menu and left in the shape they already had
+   down there. On a wide screen it is empty and the closing band keeps all
+   four, so this is the one thing on the page a phone sees and a desktop
+   does not.
+   ========================================================================== */
+.pair{display:grid; grid-template-columns:1fr 1fr; gap:0}
+.pair .ph{aspect-ratio:3/4}
+@media (min-width:620px){ .pair{display:none} }
 
 /* ==========================================================================
    footer
@@ -703,6 +711,9 @@ a.ph:hover img{transform:scale(1.04)}
     </div>
   </div>
 </div>
+
+<!-- ===================== the phone pair ===================== -->
+<div class="pair" id="pair" hidden></div>
 
 <!-- ===================== the board ===================== -->
 <section class="board-band" id="menu">
@@ -1047,8 +1058,29 @@ const SITE = {
   $("#strip").innerHTML = SITE.images.strip
     .map(o => frame(o, "", { sizes: "(min-width:760px) 33vw, 100vw" })).join("");
   $("#events-media").innerHTML = img(SITE.images.events, { sizes: "(min-width:900px) 50vw, 100vw" });
+  /* even entries are the landscape photographs, odd ones the portraits. The
+     shape travels with the figure as a class, so it survives the move below. */
   $("#filmstrip").innerHTML = SITE.images.film
-    .map(o => frame(o, "", { sizes: "(min-width:760px) 25vw, 50vw" })).join("");
+    .map((o, i) => frame(o, i % 2 ? "ph--tall" : "ph--wide", { sizes: "(min-width:760px) 25vw, 50vw" })).join("");
+
+  /* ---------- the phone pair ----------------------------------------------
+     On a phone the bowl and the sandwiches leave the closing band and sit
+     between the opening and the menu instead. The figures are moved and never
+     copied, so each photograph is still fetched once, and they go back where
+     they belong the moment the window is wide again. ----------------------- */
+  (function () {
+    const film = $("#filmstrip"), pair = $("#pair");
+    const all = [...film.children];
+    const movers = all.filter(f => f.classList.contains("ph--tall"));
+    const phone = matchMedia("(max-width:619px)");
+    const place = () => {
+      if (phone.matches) movers.forEach(f => pair.append(f));
+      else all.forEach(f => film.append(f));
+      pair.hidden = !phone.matches;
+    };
+    place();
+    phone.addEventListener("change", place);
+  })();
 
   /* ---------- the board ---------- */
   $("#board").innerHTML = SITE.menu.map(cat => `

@@ -159,6 +159,15 @@ first row, the three sections take the second under a hairline, and the phone
 button drops to its icon because the number is already in the fixed bar at the
 bottom of the screen.
 
+The photographs differ on a phone too. Under 620 pixels the bowl and the
+sandwiches leave the closing band and sit between the opening screen and the
+menu, and the closing band keeps the coffee and the bread beside each other.
+Nothing is duplicated: the page moves those two figures and moves them back the
+moment the window is wider than that. On a computer all four stay in the closing
+band exactly as before. In `SITE.images.film` the even entries are the landscape
+photographs and the odd ones the portraits, which is what decides who moves, so
+keep that alternation if you reorder the four.
+
 ## Publishing
 
 The site is published with GitHub Pages, free, straight out of this repository.
