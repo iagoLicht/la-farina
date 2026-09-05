@@ -311,8 +311,10 @@ a.ph:hover img{transform:scale(1.04)}
   .hdr .wrap{flex-wrap:wrap; column-gap:.85rem; row-gap:0}
   .brand{margin-inline-end:auto; padding-block:0; height:var(--hdr-1)}
   .hdr-ig{width:36px; min-height:36px}
-  .hdr-tel{width:38px; height:38px; padding:0; justify-content:center}
-  .hdr-tel span{display:none}
+  .hdr-tel{width:38px; height:38px; padding:0; justify-content:center; position:relative}
+  /* the number is the button's only accessible name, so it is hidden the way
+     .sr hides things, never with display:none */
+  .hdr-tel span{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
   .mainnav{
     order:1; flex-basis:100%; height:var(--hdr-2); margin:0; gap:0;
     align-items:center; justify-content:space-between; position:relative;
@@ -894,14 +896,14 @@ const SITE = {
       { n:"כריך סביח", p:35 }
     ]},
     { name:"סלטים", items:[
-      { n:"סלט טונה", d:"עגבנייה, מלפפון, טונה, חסה, שמן זית, גבינה קשה", p:40 },
+      { n:"סלט טונה", d:"עגבנייה, מלפפון, טונה, חסה, שמן זית, ביצה קשה", p:40 },
       { n:"סלט יווני", d:"עגבנייה, מלפפון, בצל סגול, שמן זית, גבינה בולגרית", p:40 },
       { n:"סלט מוצרלה", d:"עגבנייה, מלפפון, מוצרלה, חסה, שמן זית, בלסמי", p:40 }
     ]},
     { name:"בורקס", items:[
       { n:"בורקס גבינה", p:19 },
-      { n:"בורקס פיצה", p:24 },
-      { n:"בורקס גבינה, זיתים ופטריות", p:24 }
+      { n:"קלצונה פיצה", p:25 },
+      { n:"בורקס גבינה, זיתים ופטריות", p:25 }
     ]},
     { name:"פיצות", items:[
       { n:"פיצה אישית", p:32 },
