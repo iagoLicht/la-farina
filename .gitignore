@@ -8,3 +8,6 @@ lafarina-preview.html
 
 # generated artifact build and its photo cache, rebuilt by tools/build-artifact.py
 build/
+
+# camera originals, the site ships the resized copies beside them
+assets/photos/07-your-eyes/DSC_*.JPG

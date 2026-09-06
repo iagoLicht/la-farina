@@ -553,6 +553,62 @@ a.ph:hover img{transform:scale(1.04)}
 @media (min-width:620px){ .pair{display:none} }
 
 /* ==========================================================================
+   דרך העיניים שלכם. One photograph lit at a time and its neighbours left dim
+   at the edges, so the rail says it is a rail without a row of dots having to
+   say it. Native scroll snapping rather than a transform: a phone gets a real
+   swipe with momentum for nothing, and right to left stays the browser's
+   problem instead of ours. The two spacers are what let the first and the last
+   photograph reach the middle, without them mandatory snapping fights the ends.
+   ========================================================================== */
+.eyes{background:var(--paper-2); border-block:1px solid var(--rule)}
+.eyes-head{text-align:center}
+.paint--sec{font-size:clamp(1.3rem, 3.2vw, 1.75rem); letter-spacing:.004em}
+
+.eyes-rail{
+  --gap:clamp(.7rem, 2vw, 1.35rem);
+  --slide:min(62rem, 82%);
+  display:flex; gap:var(--gap);
+  max-width:84rem; margin:clamp(1.9rem, 4vw, 2.7rem) auto 0;
+  overflow-x:auto; overscroll-behavior-inline:contain;
+  scroll-snap-type:x mandatory; scrollbar-width:none;
+}
+.eyes-rail::-webkit-scrollbar{display:none}
+.eyes-rail::before, .eyes-rail::after{
+  content:""; flex:0 0 calc((100% - var(--slide)) / 2 - var(--gap));
+}
+.eyes-rail .ph{
+  flex:0 0 var(--slide); aspect-ratio:3/2; scroll-snap-align:center;
+  opacity:.34; transform:scale(.955);
+  transition:opacity .5s ease, transform .5s cubic-bezier(.22,.7,.3,1);
+}
+.eyes-rail .ph.is-on{opacity:1; transform:none}
+
+/* the controls. Squared like every other control on the page, and the arrows
+   point the way the rail actually moves: back is to the right in Hebrew. */
+.eyes-ctl{
+  display:flex; align-items:center; justify-content:center;
+  gap:clamp(.9rem, 3vw, 1.5rem); margin-top:clamp(1.5rem, 3vw, 2.1rem);
+}
+.eyes-btn{
+  flex:none; display:grid; place-items:center; width:42px; height:42px;
+  padding:0; border:0; border-radius:1px; cursor:pointer;
+  background:var(--ink); color:var(--cream);
+  transition:background .2s ease, opacity .2s ease;
+}
+.eyes-btn:hover{background:var(--espresso)}
+.eyes-btn[disabled]{opacity:.14; cursor:default; background:var(--ink)}
+.eyes-ticks{display:flex; align-items:center; gap:.5rem; margin:0; padding:0; list-style:none}
+.eyes-tick{
+  display:grid; place-items:center; width:22px; height:26px;
+  padding:0; border:0; background:none; cursor:pointer;
+}
+.eyes-tick::before{
+  content:""; display:block; width:2px; height:10px; background:var(--rule);
+  transition:height .35s cubic-bezier(.22,.7,.3,1), background .35s ease;
+}
+.eyes-tick[aria-current="true"]::before{height:20px; background:var(--ink)}
+
+/* ==========================================================================
    footer
    ========================================================================== */
 .foot-band{background:var(--ink); color:var(--cream); padding-block:clamp(2.75rem,6vw,4rem) 1.75rem}
@@ -784,6 +840,24 @@ a.ph:hover img{transform:scale(1.04)}
 <!-- ===================== closing band ===================== -->
 <div class="filmstrip" id="filmstrip" aria-label="תמונות מהטראק"></div>
 
+<!-- ===================== דרך העיניים שלכם ===================== -->
+<section class="eyes band" id="eyes" aria-labelledby="eyes-title">
+  <div class="wrap eyes-head rise">
+    <h2 class="paint paint--sec" id="eyes-title"><span>דרך העיניים שלכם</span></h2>
+  </div>
+  <div class="eyes-rail" id="eyes-rail" tabindex="0" role="group"
+       aria-roledescription="גלריה" aria-label="תמונות מהטראק, אחת בכל פעם"></div>
+  <div class="wrap eyes-ctl">
+    <button class="eyes-btn" id="eyes-prev" type="button" aria-label="התמונה הקודמת">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+    </button>
+    <ol class="eyes-ticks" id="eyes-ticks"></ol>
+    <button class="eyes-btn" id="eyes-next" type="button" aria-label="התמונה הבאה">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+    </button>
+  </div>
+</section>
+
 <!-- ===================== footer ===================== -->
 <footer class="foot-band on-dark">
   <div class="wrap">
@@ -1000,6 +1074,32 @@ const SITE = {
         /* בטלפון האריח ריבועי: מורידים את החיתוך אל הכריכים ומוותרים על תאורת התקרה */
         posM:"50% 62%",
         alt:"כריכים טריים בויטרינה" }
+    ],
+
+    /* שבע תמונות מהטראק, בקרוסלה שבתחתית העמוד. כולן 3:2, בדיוק הצורה של
+       המסגרת, כך שאף אחת מהן לא נחתכת. הסדר כאן הוא הסדר שרואים בקרוסלה. */
+    eyes: [
+      { src:"assets/photos/07-your-eyes/latte-mandala-1600.jpg",
+        srcset:"assets/photos/07-your-eyes/latte-mandala-900.jpg 900w, assets/photos/07-your-eyes/latte-mandala-1600.jpg 1600w",
+        alt:"קפה הפוך עם ציור בחלב, ניצב על משטח מצויר בדוגמת מנדלה" },
+      { src:"assets/photos/07-your-eyes/croissants-case-1600.jpg",
+        srcset:"assets/photos/07-your-eyes/croissants-case-900.jpg 900w, assets/photos/07-your-eyes/croissants-case-1600.jpg 1600w",
+        alt:"קרואסונים בויטרינה, אחד בזיגוג פיסטוק ואחד בשוקולד" },
+      { src:"assets/photos/07-your-eyes/cinnamon-rolls-1600.jpg",
+        srcset:"assets/photos/07-your-eyes/cinnamon-rolls-900.jpg 900w, assets/photos/07-your-eyes/cinnamon-rolls-1600.jpg 1600w",
+        alt:"מגש רולים של קינמון בזיגוג לבן, טריים מהתנור" },
+      { src:"assets/photos/07-your-eyes/tray-sandwich-latte-1600.jpg",
+        srcset:"assets/photos/07-your-eyes/tray-sandwich-latte-900.jpg 900w, assets/photos/07-your-eyes/tray-sandwich-latte-1600.jpg 1600w",
+        alt:"מגש עם כריך חם, קפה הפוך, ירקות חתוכים וזיתים" },
+      { src:"assets/photos/07-your-eyes/toast-tray-1600.jpg",
+        srcset:"assets/photos/07-your-eyes/toast-tray-900.jpg 900w, assets/photos/07-your-eyes/toast-tray-1600.jpg 1600w",
+        alt:"טוסט חתוך לשניים על מגש, לצד שתי כוסיות תוספות" },
+      { src:"assets/photos/07-your-eyes/iced-coffee-pour-1600.jpg",
+        srcset:"assets/photos/07-your-eyes/iced-coffee-pour-900.jpg 900w, assets/photos/07-your-eyes/iced-coffee-pour-1600.jpg 1600w",
+        alt:"אספרסו נמזג על חלב וקרח בכוס גבוהה, בדלפק" },
+      { src:"assets/photos/07-your-eyes/donuts-tray-1600.jpg",
+        srcset:"assets/photos/07-your-eyes/donuts-tray-900.jpg 900w, assets/photos/07-your-eyes/donuts-tray-1600.jpg 1600w",
+        alt:"שני דונאטס בתבנית קרטון על שולחן עץ, בישיבה שבחוץ" }
     ]
   }
 };
@@ -1082,6 +1182,62 @@ const SITE = {
     };
     place();
     phone.addEventListener("change", place);
+  })();
+
+  /* ---------- דרך העיניים שלכם -------------------------------------------
+     The scroll position is the only truth here. A swipe, an arrow and a mark
+     all end up moving the rail, and the rail then says which photograph sits
+     nearest its middle, so nothing has to keep an index of its own. -------- */
+  (function () {
+    const rail = $("#eyes-rail"), shots = SITE.images.eyes || [];
+    if (!rail || !shots.length) return;
+
+    rail.innerHTML = shots
+      .map(o => frame(o, "", { sizes: "(min-width:1200px) 62rem, 82vw" })).join("");
+    $("#eyes-ticks").innerHTML = shots.map((o, i) => `
+      <li><button class="eyes-tick" type="button" aria-current="${i === 0}">
+        <span class="sr">תמונה ${i + 1} מתוך ${shots.length}</span>
+      </button></li>`).join("");
+
+    const slides = $$(".ph", rail);
+    const ticks  = $$(".eyes-tick");
+    const prev   = $("#eyes-prev"), next = $("#eyes-next");
+    const ease   = matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+    let at = -1;
+
+    const light = i => {
+      if (i === at) return;
+      at = i;
+      slides.forEach((f, n) => f.classList.toggle("is-on", n === i));
+      ticks.forEach((t, n) => t.setAttribute("aria-current", n === i ? "true" : "false"));
+      prev.disabled = i === 0;
+      next.disabled = i === slides.length - 1;
+    };
+    const go = i => slides[Math.max(0, Math.min(slides.length - 1, i))]
+      .scrollIntoView({ behavior: ease, block: "nearest", inline: "center" });
+
+    /* the slide whose middle is closest to the rail's middle wins. It is the
+       one reading that does not care which way the page runs. */
+    let queued = false;
+    const settle = () => {
+      queued = false;
+      const box = rail.getBoundingClientRect(), mid = box.left + box.width / 2;
+      let win = 0, near = Infinity;
+      slides.forEach((f, n) => {
+        const r = f.getBoundingClientRect();
+        const d = Math.abs(r.left + r.width / 2 - mid);
+        if (d < near) { near = d; win = n; }
+      });
+      light(win);
+    };
+    const queue = () => { if (!queued) { queued = true; requestAnimationFrame(settle); } };
+
+    rail.addEventListener("scroll", queue, { passive: true });
+    addEventListener("resize", queue);
+    prev.addEventListener("click", () => go(at - 1));
+    next.addEventListener("click", () => go(at + 1));
+    ticks.forEach((t, i) => t.addEventListener("click", () => go(i)));
+    settle();
   })();
 
   /* ---------- the board ---------- */
