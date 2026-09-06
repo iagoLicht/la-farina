@@ -269,6 +269,21 @@ a.ph:hover img{transform:scale(1.04)}
 /* the truck closes the lockup. Its viewBox stops just under the wheels, so
    baseline alignment stands it on the wordmark's own baseline. */
 .brand .truck{flex:none; width:auto; height:1.05em; color:var(--ink)}
+/* Not a link and not a button, so it borrows the eyebrow's painted tick to say
+   so: everything else on this row carries an ember rule that appears under the
+   pointer, and this one wears a mark of its own all the time and never moves.
+   It rides in the nav rather than beside the lockup because beside the lockup
+   it fits a desktop and overflows a 360px phone, and an overflow there wraps
+   the header to a third row and breaks the height --hdr promises. */
+.hdr-kosher{
+  display:inline-flex; align-items:center; gap:.4rem; flex:none;
+  font-family:var(--sans); font-weight:700; font-size:var(--t-micro);
+  letter-spacing:.1em; color:var(--ink-2); white-space:nowrap;
+}
+.hdr-kosher::before{
+  content:""; flex:none; width:.8rem; height:4px;
+  background:var(--ember-deep); filter:url(#brush-fine);
+}
 .mainnav{display:flex; gap:1.75rem; margin-inline-start:auto; font-size:var(--t-small); font-weight:600}
 .mainnav a{text-decoration:none; color:var(--ink-2); position:relative; padding-block:.45rem}
 .mainnav a::after{
@@ -718,6 +733,7 @@ a.ph:hover img{transform:scale(1.04)}
       <a href="#menu">תפריט</a>
       <a href="#visit">שעות ומיקום</a>
       <a href="#events">אירועים</a>
+      <span class="hdr-kosher">כשר</span>
     </nav>
     <a class="hdr-ig" id="hdr-ig" href="#" target="_blank" rel="noopener" aria-label="אינסטגרם">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="17.2" cy="6.8" r="1.1"/></svg>
