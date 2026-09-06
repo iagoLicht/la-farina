@@ -269,21 +269,18 @@ a.ph:hover img{transform:scale(1.04)}
 /* the truck closes the lockup. Its viewBox stops just under the wheels, so
    baseline alignment stands it on the wordmark's own baseline. */
 .brand .truck{flex:none; width:auto; height:1.05em; color:var(--ink)}
-/* Not a link and not a button, so it borrows the eyebrow's painted tick to say
-   so: everything else on this row carries an ember rule that appears under the
-   pointer, and this one wears a mark of its own all the time and never moves.
-   It rides in the nav rather than beside the lockup because beside the lockup
-   it fits a desktop and overflows a 360px phone, and an overflow there wraps
-   the header to a third row and breaks the height --hdr promises. */
+/* The word, and nothing else. It is neither a link nor a button, so it carries
+   none of the ember rule the rest of this row shows under the pointer, and it
+   sits a size down from the section names so it reads as a statement about the
+   truck rather than as one more thing to press. Last in the row, which puts it
+   hard against the edge beside the phone. */
 .hdr-kosher{
-  display:inline-flex; align-items:center; gap:.4rem; flex:none;
+  display:inline-flex; align-items:center; flex:none;
   font-family:var(--sans); font-weight:700; font-size:var(--t-micro);
   letter-spacing:.1em; color:var(--ink-2); white-space:nowrap;
 }
-.hdr-kosher::before{
-  content:""; flex:none; width:.8rem; height:4px;
-  background:var(--ember-deep); filter:url(#brush-fine);
-}
+/* only a phone uses this: it forces the section names onto a row of their own */
+.hdr-break{display:none}
 .mainnav{display:flex; gap:1.75rem; margin-inline-start:auto; font-size:var(--t-small); font-weight:600}
 .mainnav a{text-decoration:none; color:var(--ink-2); position:relative; padding-block:.45rem}
 .mainnav a::after{
@@ -330,16 +327,25 @@ a.ph:hover img{transform:scale(1.04)}
   /* the number is the button's only accessible name, so it is hidden the way
      .sr hides things, never with display:none */
   .hdr-tel span{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0)}
-  .mainnav{
-    order:1; flex-basis:100%; height:var(--hdr-2); margin:0; gap:0;
-    align-items:center; justify-content:space-between; position:relative;
+  /* The break is what sends the second row to a line of its own. The nav used
+     to claim the whole line itself, which left no room beside it for anything
+     else, and the word כשר will not fit on the first row of a 360px phone: the
+     lockup, Instagram and the phone already fill it. The break also carries the
+     rule between the rows, which is exactly what the break is. */
+  .hdr-break{
+    display:block; order:1; flex-basis:100%; height:0; position:relative;
   }
-  /* the rule between the two rows runs to both edges, like the one the header
-     grows under the whole thing once you have scrolled */
-  .mainnav::before{
+  .hdr-break::before{
     content:""; position:absolute; top:0; inset-inline:calc(var(--pad) * -1);
     height:1px; background:var(--rule-soft);
   }
+  .mainnav{
+    order:2; flex:1 1 auto; height:var(--hdr-2); margin:0; gap:0;
+    align-items:center; justify-content:space-between;
+  }
+  /* the nav grows to fill the row, so the last section name would otherwise
+     end up shoulder to shoulder with the word */
+  .hdr-kosher{order:2; height:var(--hdr-2); margin-inline-start:.45rem}
 }
 
 /* ==========================================================================
@@ -733,7 +739,6 @@ a.ph:hover img{transform:scale(1.04)}
       <a href="#menu">תפריט</a>
       <a href="#visit">שעות ומיקום</a>
       <a href="#events">אירועים</a>
-      <span class="hdr-kosher">כשר</span>
     </nav>
     <a class="hdr-ig" id="hdr-ig" href="#" target="_blank" rel="noopener" aria-label="אינסטגרם">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="17.2" cy="6.8" r="1.1"/></svg>
@@ -742,6 +747,8 @@ a.ph:hover img{transform:scale(1.04)}
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.4 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
       <span id="hdr-tel-text">התקשרו</span>
     </a>
+    <span class="hdr-break" aria-hidden="true"></span>
+    <span class="hdr-kosher">כשר</span>
   </div>
 </header>
 
