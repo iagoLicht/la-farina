@@ -1,0 +1,7 @@
+# La Farina Food Truck
+# Everything is public and crawlable. There is one page.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://iagolicht.github.io/la-farina/sitemap.xml
