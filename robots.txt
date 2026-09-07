@@ -4,4 +4,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://iagolicht.github.io/la-farina/sitemap.xml
+Sitemap: https://lafarinatruck.com/sitemap.xml
